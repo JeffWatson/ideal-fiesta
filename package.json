@@ -1,0 +1,53 @@
+{
+  "name": "ideal-fiesta",
+  "description": "2d Matrix style Board game",
+  "version": "1.0.0",
+  "main": "index.js",
+  "babel": {
+    "presets": [
+      "es2015"
+    ]
+  },
+  "scripts": {
+    "dev": "webpack-dev-server --colors --progress",
+    "default": "gulp",
+    "lint": "gulp eslint",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JeffWatson/ideal-fiesta.git"
+  },
+  "author": "Jeff Watson (Jeff.Watson4@gmail.com)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JeffWatson/ideal-fiesta/issues"
+  },
+  "homepage": "https://github.com/JeffWatson/ideal-fiesta#readme",
+  "dependencies": {
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1"
+  },
+  "devDependencies": {
+    "babel": "^6.23.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "css-loader": "^0.28.5",
+    "eslint": "^4.5.0",
+    "eslint-config-airbnb": "^15.1.0",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-jsx-a11y": "^5.1.1",
+    "eslint-plugin-react": "^7.3.0",
+    "gulp": "^3.9.1",
+    "gulp-eslint": "^4.0.0",
+    "node-sass": "^4.5.3",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.18.2",
+    "webpack": "^3.5.5",
+    "webpack-dev-server": "^2.7.1"
+  }
+}
