@@ -1,6 +1,8 @@
 # ideal-fiesta
 
-[![Build Status](https://travis-ci.org/JeffWatson/ideal-fiesta.svg?branch=master)](https://travis-ci.org/JeffWatson/ideal-fiesta)2d Matrix style Board game
+[![Build Status](https://travis-ci.org/JeffWatson/ideal-fiesta.svg?branch=master)](https://travis-ci.org/JeffWatson/ideal-fiesta)
+
+2d Matrix style Board game
 
 npm install gulp 
 npm install gulp-cli
