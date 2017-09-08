@@ -17,6 +17,9 @@ module.exports = {
         "react/jsx-filename-extension": 0,
         indent: ['error', 2],
         "quote-props": [2, 'as-needed'],
-        'quotes': [2, 'single']
+        'quotes': [2, 'single'],
+        'sort-keys': 2,
+        'sort-imports': 2,
+        'sort-vars': 2
     }
 };

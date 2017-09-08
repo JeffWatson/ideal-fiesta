@@ -1,5 +1,5 @@
-import gulp from 'gulp';
 import eslint from 'gulp-eslint';
+import gulp from 'gulp';
 
 gulp.task('eslint', () => gulp.src(['*.js'])
   .pipe(eslint({

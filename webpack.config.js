@@ -1,9 +1,5 @@
 module.exports = {
   entry: './src/frontend/index.js',
-  output: {
-    path: __dirname,
-    filename: 'public/bundle.js',
-  },
   module: {
     loaders: [
       {
@@ -17,12 +13,16 @@ module.exports = {
         }],
       },
       {
-        test: /\.js$/,
         loader: 'babel-loader',
         query: {
           presets: ['es2015', 'react'],
         },
+        test: /\.js$/,
       },
     ],
+  },
+  output: {
+    filename: 'public/bundle.js',
+    path: __dirname,
   },
 };
