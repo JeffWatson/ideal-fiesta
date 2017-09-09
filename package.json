@@ -22,8 +22,15 @@
   },
   "homepage": "https://github.com/JeffWatson/ideal-fiesta#readme",
   "dependencies": {
+    "immutable": "^3.8.1",
+    "lodash": "^4.17.4",
+    "prop-types": "^15.5.10",
     "react": "^15.6.1",
-    "react-dom": "^15.6.1"
+    "react-dom": "^15.6.1",
+    "react-immutable-proptypes": "^2.1.0",
+    "react-redux": "^5.0.6",
+    "redux": "^3.7.2",
+    "reselect": "^3.0.1"
   },
   "devDependencies": {
     "babel": "^6.23.0",

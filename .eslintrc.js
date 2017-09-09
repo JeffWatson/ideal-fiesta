@@ -19,7 +19,7 @@ module.exports = {
         "quote-props": [2, 'as-needed'],
         'quotes': [2, 'single'],
         'sort-keys': 2,
-        'sort-imports': 2,
-        'sort-vars': 2
+        'sort-vars': 2,
+        'linebreak-style': 0
     }
 };

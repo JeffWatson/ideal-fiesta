@@ -1,4 +1,5 @@
 module.exports = {
+  devtool: 'source-map',
   entry: './src/frontend/index.js',
   module: {
     loaders: [
