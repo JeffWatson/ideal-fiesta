@@ -58,7 +58,7 @@ export const UNITS = {
       name: 'CARRIER',
     },
     DESTROYER: {
-      attacks: [UNIT_TYPES.AIR, UNIT_TYPES.LAND, UNIT_TYPES.SEA],
+      attacks: [UNIT_TYPES.LAND, UNIT_TYPES.SEA],
       name: 'DESTROYER',
     },
     SUBMARINE: {
