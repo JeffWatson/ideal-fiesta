@@ -1,4 +1,4 @@
-import { onCellClick } from './matrixActions';
+import onCellClick from './onCellClick';
 
 export default function mapDispatchToProps(dispatch) {
   return {

@@ -1,4 +1,3 @@
-import { Map } from 'immutable';
 import initialState from './initialState';
 
 export default function matrixViewReducer(state, action) {
@@ -6,6 +5,6 @@ export default function matrixViewReducer(state, action) {
   case 'CELL_CLICK':
     return state.merge(action.newState);
   default:
-    return state || Map(initialState);
+    return state || initialState;
   }
 }

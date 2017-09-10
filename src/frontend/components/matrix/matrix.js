@@ -9,8 +9,8 @@ class MatrixView extends Component {
   generateMatrix({ matrix }) {
     return (times(matrix.get('rows'), row => (<tr className="matrix-row" key={`matrix-row-${row}`}>
       {times(matrix.get('columns'), (column) => {
-        const cell = matrix.get('grid')[row][column];
-        return this.renderCell({ column, row, terrain: cell.terrain, unit: cell.unit });
+        const cell = matrix.getIn(['grid', row, column]);
+        return this.renderCell({ column, row, terrain: cell.get('terrain'), unit: cell.get('unit') });
       })}
     </tr>)));
   }
