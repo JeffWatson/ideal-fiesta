@@ -1,0 +1,14 @@
+@import "../../app/style/variables";
+
+.matrix {
+  .matrix-table {
+    .matrix-cell {
+      height: $matrixCellHeight;
+      width: $matrixCellWidth;
+
+      &.selected {
+        background-color: $yellow;
+      }
+    }
+  }
+}
