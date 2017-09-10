@@ -3,6 +3,19 @@ $yellow: yellow;
 $red: red;
 $blue: blue;
 $green: green;
+$black: black;
+$white: white;
+
+// Terrain
+$grass: #00ff66;
+$sand: #ffdd22;
+$ocean: #0022ee;
 
 $matrixCellHeight: 100px;
 $matrixCellWidth: 100px;
+
+// TODO make mixin for these...
+$matrix-unselected-color: $white;
+$matrix-selected-color: $black;
+$matrix-movable-color: $blue;
+$matrix-attackable-color: $red;

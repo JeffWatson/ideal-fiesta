@@ -5,9 +5,23 @@
     .matrix-cell {
       height: $matrixCellHeight;
       width: $matrixCellWidth;
+      border: 3px solid $matrix-unselected-color;
 
       &.selected {
-        background-color: $yellow;
+        border: 3px solid $matrix-selected-color;
+      }
+
+      &.movable {
+        border: 3px solid $matrix-movable-color;
+      }
+
+      &.attackable {
+        border: 3px solid $matrix-attackable-color;
+      }
+
+      & > div {
+        height: $matrixCellHeight;
+        width: $matrixCellWidth;
       }
     }
   }

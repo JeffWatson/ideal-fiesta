@@ -3,6 +3,7 @@ import { func } from 'prop-types';
 import { connect } from 'react-redux';
 import { times } from 'lodash';
 import UnitFactory from './../units/unitFactory';
+import TerrainFactory from './../terrain/terrainFactory';
 import mapStateToProps from './selector/mapStateToProps';
 import mapDispatchToProps from './actions/mapDispatchToProps';
 
@@ -21,11 +22,14 @@ class MatrixView extends Component {
   renderCell({ terrain, column, row, unit, selected }) {
     const { onCellClick } = this.props;
     const key = `matrix-cell-${column}-${row}-${terrain}`;
+    const children = UnitFactory.createUnit({ player: {}, factoryType: 'LAND', unit });
     return (<td
-      className={`matrix-cell ${terrain} ${selected ? 'selected' : ''}`}
+      className={`matrix-cell ${selected ? 'selected' : ''}`}
       key={key}
       onClick={() => onCellClick({ terrain, column, row, unit, matrix: this.props.matrix })}
-    >{terrain} occupied by {UnitFactory.createUnit({ player: {}, factoryType: 'LAND', unit })}</td>);
+    >
+      {TerrainFactory.createTerrain({ terrain, children })}
+    </td>);
   }
 
   render() {

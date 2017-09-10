@@ -5,6 +5,36 @@ export const PLAYERS = {
   YELLOW: 'YELLOW',
 };
 
+export const TERRAIN = {
+  GRASS: {
+    name: 'GRASS',
+  },
+  SAND: {
+    name: 'SAND',
+  },
+  OCEAN: {
+    name: 'OCEAN',
+  },
+  TREE: {
+    name: 'TREE',
+  },
+  MOUNTAIN: {
+    name: 'MOUNTAIN',
+  },
+  CITY: {
+    name: 'CITY',
+  },
+  LAND_FACTORY: {
+    name: 'LAND_FACTORY',
+  },
+  AIR_FACTORY: {
+    name: 'AIR_FACTORY',
+  },
+  SEA_FACTORY: {
+    name: 'SEA_FACTORY',
+  },
+};
+
 const UNIT_TYPES = {
   AIR: 'AIR',
   LAND: 'LAND',
