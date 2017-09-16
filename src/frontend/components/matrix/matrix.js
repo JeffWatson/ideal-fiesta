@@ -14,17 +14,23 @@ class MatrixView extends Component {
     return (times(matrix.get('rows'), row => (<tr className="matrix-row" key={`matrix-row-${row}`}>
       {times(matrix.get('columns'), (column) => {
         const cell = matrix.getIn(['grid', row, column]);
-        return this.renderCell({ column, row, selected: cell.get('selected'), terrain: cell.get('terrain'), unit: cell.get('unit') });
+        return this.renderCell({ column, row, cell });
       })}
     </tr>)));
   }
 
-  renderCell({ terrain, column, row, unit, selected }) {
+  renderCell({ column, row, cell }) {
     const { onCellClick } = this.props;
-    const key = `matrix-cell-${column}-${row}-${terrain}`;
+    const unit = cell.get('unit');
+    const terrain = cell.get('terrain');
+    const selected = cell.get('selected');
+    const attackable = cell.get('attackable');
+    const movable = cell.get('movable');
+
+    const key = `matrix-cell-${column}-${row}-${cell.get('terrain')}`;
     const children = UnitFactory.createUnit({ player: {}, factoryType: 'LAND', unit });
     return (<td
-      className={`matrix-cell ${selected ? 'selected' : ''}`}
+      className={`matrix-cell ${selected ? 'selected' : ''} ${attackable ? 'attackable' : ''} ${movable ? 'movable' : ''}`}
       key={key}
       onClick={() => onCellClick({ terrain, column, row, unit, matrix: this.props.matrix })}
     >

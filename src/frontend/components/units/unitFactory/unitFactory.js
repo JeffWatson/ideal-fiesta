@@ -8,7 +8,7 @@ import SmallTank from './../smallTank';
 
 export default class UnitFactory {
   static createUnit({ factoryType, unit, player }) {
-    const props = fromJS(extend(UNIT_PROPS[factoryType][unit], { player }));
+    const props = fromJS(extend(UNIT_PROPS[unit], { player }));
 
     switch (props.get('name')) {
     case 'SOLDIER': return (<Soldier {...props} />);

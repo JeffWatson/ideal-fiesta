@@ -15,7 +15,7 @@
         border: 3px solid $matrix-movable-color;
       }
 
-      &.attackable {
+      &.attackable:not(.movable) {
         border: 3px solid $matrix-attackable-color;
       }
 

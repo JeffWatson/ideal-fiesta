@@ -18,8 +18,6 @@ module.exports = {
         indent: ['error', 2],
         "quote-props": [2, 'as-needed'],
         'quotes': [2, 'single'],
-        'sort-keys': 2,
-        'sort-vars': 2,
         'linebreak-style': 0
     }
 };
