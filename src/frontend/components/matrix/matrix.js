@@ -11,16 +11,16 @@ import mapDispatchToProps from './actions/mapDispatchToProps';
 import './matrix.scss';
 
 class MatrixView extends Component {
-  generateMatrix({ matrix }) {
+  generateMatrix({ matrix, currentPlayer }) {
     return (times(matrix.get('rows'), row => (<tr className="matrix-row" key={`matrix-row-${row}`}>
       {times(matrix.get('columns'), (column) => {
         const cell = matrix.getIn(['grid', row, column]);
-        return this.renderCell({ column, row, cell });
+        return this.renderCell({ column, row, cell, currentPlayer });
       })}
     </tr>)));
   }
 
-  renderCell({ column, row, cell }) {
+  renderCell({ column, row, cell, currentPlayer }) {
     const { onCellClick } = this.props;
     const health = cell.get('health');
     const unit = cell.get('unit');
@@ -29,14 +29,15 @@ class MatrixView extends Component {
     const attackable = cell.get('attackable');
     const movable = cell.get('movable');
     const actionable = cell.get('actionable');
+    const player = cell.get('player');
     const className = classNames('matrix-cell', { attackable, movable, actionable, selected });
 
     const key = `matrix-cell-${column}-${row}-${terrain}`;
-    const children = UnitFactory.createUnit({ player: {}, factoryType: 'LAND', unit });
+    const children = UnitFactory.createUnit({ player, factoryType: 'LAND', unit });
     return (<td
       className={className}
       key={key}
-      onClick={() => onCellClick({ terrain, column, row, unit, matrix: this.props.matrix })}
+      onClick={() => onCellClick({ terrain, column, row, unit, matrix: this.props.matrix, currentPlayer })}
     >
       {TerrainFactory.createTerrain({ terrain, children, row, column, health })}
     </td>);
@@ -44,11 +45,13 @@ class MatrixView extends Component {
 
   render() {
     const { matrix } = this.props;
+    const currentPlayer = matrix.get('currentPlayer');
 
     return (<div className="matrix">
+      <div className="current-player-info">The current Player is: { currentPlayer }</div>
       <table className="matrix-table">
         <tbody>
-          {this.generateMatrix({ matrix })}
+          {this.generateMatrix({ matrix, currentPlayer })}
         </tbody>
       </table>
     </div>);

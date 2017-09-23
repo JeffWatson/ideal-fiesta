@@ -8,19 +8,21 @@ class BattleMatrix {
     this.matrix = matrix;
   }
 
-  onCellClick({ row, column }) {
+  onCellClick({ row, column, currentPlayer }) {
     this.deselectAllCells();
 
     const unit = this.getUnitAt({ row, column });
+    const isCurrentPlayer = this.getCell({ row, column }).get('player') === currentPlayer;
+
     const terrainProps = TERRAIN[this.getTerrainAt({ row, column })];
-    if (unit || terrainProps.selectable) {
+    if (terrainProps.selectable || (unit && isCurrentPlayer)) {
       this.selectCell({ row, column });
     }
 
     if (unit) {
       const unitProps = UNITS[unit];
       const stats = unitProps.stats;
-      this.calculateMoves({ row, column, move: stats.move, range: stats.range, unitProps });
+      this.calculateMoves({ row, column, move: stats.move, range: stats.range, unitProps, currentPlayer });
     }
 
     if (terrainProps.actionable) {
@@ -57,41 +59,42 @@ class BattleMatrix {
     this.matrix = this.matrix.set('grid', this.matrix.get('grid').setIn([row, column, 'actionable'], true));
   }
 
-  calculateMoves({ row, column, move, range, unitProps }) {
-    this.calculateMove({ row, column, move, range, unitProps });
+  calculateMoves({ row, column, move, range, unitProps, currentPlayer }) {
+    this.calculateMove({ row, column, move, range, unitProps, currentPlayer });
 
     const cell = this.getCell({ row, column });
     if (cell.get('movable') && move >= 0) {
-      this.movement({ row, column, move: move - 1, range, unitProps });
+      this.movement({ row, column, move: move - 1, range, unitProps, currentPlayer });
     } else if (cell.get('attackable') && move > 0 && range > 1) {
-      this.movement({ row, column, move: 0, range: range - 1, unitProps });
+      this.movement({ row, column, move: 0, range: range - 1, unitProps, currentPlayer });
     } else if (cell.get('attackable') && !move && range > 1) {
-      this.movement({ row, column, move, range: range - 1, unitProps });
+      this.movement({ row, column, move, range: range - 1, unitProps, currentPlayer });
     }
   }
 
   // TODO for performance, use queue?
   // TODO take in to account selected state. Don't add movable, attackable. Actionable, yes.
-  movement({ row, column, move, range, unitProps }) {
+  movement({ row, column, move, range, unitProps, currentPlayer }) {
     const north = row - 1;
     const south = row + 1;
     const west = column - 1;
     const east = column + 1;
     if (north >= 0) {
-      this.calculateMoves({ row: north, column, move, range, unitProps });
+      this.calculateMoves({ row: north, column, move, range, unitProps, currentPlayer });
     }
     if (west >= 0) {
-      this.calculateMoves({ row, column: west, move, range, unitProps });
+      this.calculateMoves({ row, column: west, move, range, unitProps, currentPlayer });
     }
     if (south < this.matrix.get('rows')) {
-      this.calculateMoves({ row: south, column, move, range, unitProps });
+      this.calculateMoves({ row: south, column, move, range, unitProps, currentPlayer });
     }
     if (east < this.matrix.get('columns')) {
-      this.calculateMoves({ row, column: east, move, range, unitProps });
+      this.calculateMoves({ row, column: east, move, range, unitProps, currentPlayer });
     }
   }
 
-  calculateMove({ row, column, move, range, unitProps }) {
+  // TODO unit combination. take into account health. combine like units with sum of health < MAX_HEALTH
+  calculateMove({ row, column, move, range, unitProps, currentPlayer }) {
     const cell = this.getCell({ row, column });
     const occupantUnit = cell.get('unit');
 

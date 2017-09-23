@@ -1,20 +1,21 @@
 import React from 'react';
-import { extend } from 'lodash';
-import { fromJS } from 'immutable';
-import { UNITS as UNIT_PROPS } from '../../../../shared/sharedConstants';
+import { extend, toLower } from 'lodash';
+import { UNITS } from '../../../../shared/sharedConstants';
 
 import Soldier from './../soldier';
 import SmallTank from './../smallTank';
 import Artillery from './../artillery';
 
-export default class UnitFactory {
-  static createUnit({ factoryType, unit, player }) {
-    const props = fromJS(extend(UNIT_PROPS[unit], { player }));
+import './units.scss';
 
-    switch (props.get('name')) {
-    case 'SOLDIER': return (<Soldier {...props} />);
-    case 'SMALL_TANK': return (<SmallTank {...props} />);
-    case 'ARTILLERY': return (<Artillery {...props} />);
+export default class UnitFactory {
+  static createUnit({ unit, player }) {
+    const unitProps = extend(UNITS[unit], { player: toLower(player) });
+
+    switch (unitProps.name) {
+    case UNITS.SOLDIER.name: return (<Soldier {...unitProps} />);
+    case UNITS.SMALL_TANK.name: return (<SmallTank {...unitProps} />);
+    case UNITS.ARTILLERY.name: return (<Artillery {...unitProps} />);
     default: return null;
     }
   }
