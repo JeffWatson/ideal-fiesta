@@ -5,34 +5,23 @@ export const PLAYERS = {
   YELLOW: 'YELLOW',
 };
 
+export const TERRAIN_TYPES = {
+  GRASS: 'GRASS',
+  SAND: 'SAND',
+  OCEAN: 'OCEAN',
+  TREE: 'TREE',
+  MOUNTAIN: 'MOUNTAIN',
+  CITY: 'CITY',
+  LAND_FACTORY: 'LAND_FACTORY',
+  AIR_FACTORY: 'AIR_FACTORY',
+  SEA_FACTORY: 'SEA_FACTORY',
+};
+
 export const TERRAIN = {
-  GRASS: {
-    name: 'GRASS',
-  },
-  SAND: {
-    name: 'SAND',
-  },
-  OCEAN: {
-    name: 'OCEAN',
-  },
-  TREE: {
-    name: 'TREE',
-  },
-  MOUNTAIN: {
-    name: 'MOUNTAIN',
-  },
-  CITY: {
-    name: 'CITY',
-  },
-  LAND_FACTORY: {
-    name: 'LAND_FACTORY',
-  },
-  AIR_FACTORY: {
-    name: 'AIR_FACTORY',
-  },
-  SEA_FACTORY: {
-    name: 'SEA_FACTORY',
-  },
+  GRASS: {},
+  SAND: {},
+  OCEAN: {},
+  MOUNTAIN: {},
 };
 
 const UNIT_TYPES = {
@@ -43,70 +32,77 @@ const UNIT_TYPES = {
 
 export const UNITS = {
   BOMBER: {
-    type: 'AIR',
+    type: UNIT_TYPES.AIR,
     attacks: [UNIT_TYPES.LAND],
     name: 'BOMBER',
   },
   HELICOPTER: {
-    type: 'AIR',
+    type: UNIT_TYPES.AIR,
     attacks: [UNIT_TYPES.AIR, UNIT_TYPES.LAND, UNIT_TYPES.SEA],
     name: 'HELICOPTER',
   },
   JET: {
-    type: 'AIR',
+    type: UNIT_TYPES.AIR,
     attacks: [UNIT_TYPES.AIR],
     name: 'JET',
   },
   ANTI_AIR: {
-    type: 'LAND',
+    type: UNIT_TYPES.LAND,
     attacks: [UNIT_TYPES.AIR, UNIT_TYPES.LAND],
     name: 'ANTI_AIR',
   },
   ARTILLERY: {
-    type: 'LAND',
+    type: UNIT_TYPES.LAND,
     attacks: [UNIT_TYPES.LAND, UNIT_TYPES.SEA],
     name: 'ARTILLERY',
+    inaccessibleTerrain: [TERRAIN_TYPES.OCEAN, TERRAIN_TYPES.MOUNTAIN],
+    stats: {
+      range: 2,
+      move: 4,
+    },
   },
   MEDIUM_TANK: {
-    type: 'LAND',
+    type: UNIT_TYPES.LAND,
     attacks: [UNIT_TYPES.AIR, UNIT_TYPES.LAND, UNIT_TYPES.SEA],
     name: 'MEDIUM_TANK',
   },
   PERSONNEL_CARRIER: {
-    type: 'LAND',
+    type: UNIT_TYPES.LAND,
     attacks: [],
     name: 'PERSONNEL_CARRIER',
   },
   SMALL_TANK: {
-    type: 'LAND',
+    type: UNIT_TYPES.LAND,
     attacks: [UNIT_TYPES.AIR, UNIT_TYPES.LAND, UNIT_TYPES.SEA],
     name: 'SMALL_TANK',
+    inaccessibleTerrain: [TERRAIN_TYPES.OCEAN, TERRAIN_TYPES.MOUNTAIN],
     stats: {
       range: 1,
       move: 4,
     },
   },
   SOLDIER: {
-    type: 'LAND',
+    type: UNIT_TYPES.LAND,
     attacks: [UNIT_TYPES.AIR, UNIT_TYPES.LAND, UNIT_TYPES.SEA],
     name: 'SOLDIER',
+    inaccessibleTerrain: [TERRAIN_TYPES.OCEAN],
     stats: {
       range: 1,
       move: 3,
     },
   },
   CARRIER: {
-    type: 'SEA',
+    type: UNIT_TYPES.SEA,
     attacks: [UNIT_TYPES.AIR, UNIT_TYPES.LAND],
     name: 'CARRIER',
   },
   DESTROYER: {
-    type: 'SEA',
+    type: UNIT_TYPES.SEA,
     attacks: [UNIT_TYPES.LAND, UNIT_TYPES.SEA],
     name: 'DESTROYER',
   },
   SUBMARINE: {
-    type: 'SEA',
+    type: UNIT_TYPES.SEA,
     attacks: [UNIT_TYPES.SEA],
     name: 'SUBMARINE',
   },

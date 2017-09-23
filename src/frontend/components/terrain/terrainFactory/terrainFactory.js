@@ -1,20 +1,21 @@
 import React from 'react';
-import { extend, upperCase } from 'lodash';
 import { fromJS } from 'immutable';
-import { TERRAIN } from '../../../../shared/sharedConstants';
+import { TERRAIN, TERRAIN_TYPES } from '../../../../shared/sharedConstants';
 
 import Grass from './../grass';
 import Sand from './../sand';
 import Ocean from './../ocean';
+import Mountain from './../mountain';
 
 export default class UnitFactory {
   static createTerrain({ terrain, children }) {
-    const props = fromJS(extend(TERRAIN[upperCase(terrain)]));
+    const props = fromJS(TERRAIN[terrain]);
 
-    switch (props.get('name')) {
-    case TERRAIN.GRASS.name: return (<Grass {...props} >{ children }</Grass>);
-    case TERRAIN.SAND.name: return (<Sand {...props} >{ children }</Sand>);
-    case TERRAIN.OCEAN.name: return (<Ocean {...props} >{ children }</Ocean>);
+    switch (TERRAIN_TYPES[terrain]) {
+    case TERRAIN_TYPES.GRASS: return (<Grass {...props} >{ children }</Grass>);
+    case TERRAIN_TYPES.SAND: return (<Sand {...props} >{ children }</Sand>);
+    case TERRAIN_TYPES.OCEAN: return (<Ocean {...props} >{ children }</Ocean>);
+    case TERRAIN_TYPES.MOUNTAIN: return (<Mountain {...props} >{ children }</Mountain>);
     default: return null;
     }
   }

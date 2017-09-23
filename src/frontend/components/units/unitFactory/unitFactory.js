@@ -5,6 +5,7 @@ import { UNITS as UNIT_PROPS } from '../../../../shared/sharedConstants';
 
 import Soldier from './../soldier';
 import SmallTank from './../smallTank';
+import Artillery from './../artillery';
 
 export default class UnitFactory {
   static createUnit({ factoryType, unit, player }) {
@@ -13,6 +14,7 @@ export default class UnitFactory {
     switch (props.get('name')) {
     case 'SOLDIER': return (<Soldier {...props} />);
     case 'SMALL_TANK': return (<SmallTank {...props} />);
+    case 'ARTILLERY': return (<Artillery {...props} />);
     default: return null;
     }
   }

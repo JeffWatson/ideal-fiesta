@@ -1,7 +1,5 @@
 import {
   UNITS,
-  TERRAIN,
-  UNIT,
 } from '../../../../shared/sharedConstants';
 
 class BattleMatrix {
@@ -11,11 +9,21 @@ class BattleMatrix {
 
   onCellClick({ row, column }) {
     this.deselectAllCells();
-    this.selectCell({ row, column });
-    this.markAttackable({ row, column });
-    this.markMovable({ row, column });
+
+    const unit = this.getUnitAt({ row, column });
+    if (unit) {
+      this.selectCell({ row, column });
+
+      const unitProps = UNITS[unit];
+      const stats = unitProps.stats;
+      this.calculateMoves({ row, column, move: stats.move, range: stats.range, unitProps });
+    }
 
     return this.matrix.get('grid');
+  }
+
+  getUnitAt({ row, column }) {
+    return this.matrix.getIn(['grid', row, column, 'unit']);
   }
 
   deselectAllCells() {
@@ -24,6 +32,7 @@ class BattleMatrix {
         selected: false,
         attackable: false,
         movable: false,
+        visited: false,
       }))));
   }
 
@@ -31,32 +40,62 @@ class BattleMatrix {
     this.matrix = this.matrix.set('grid', this.matrix.get('grid').setIn([row, column, 'selected'], true));
   }
 
-  markAttackable({ row, column }) {
-    const unitProps = UNITS[this.matrix.get('grid').getIn([row, column, 'unit'])];
-    const stats = unitProps.stats;
-    const newGrid = this.matrix.get('grid').map((matrixRow, rowIndex) => matrixRow.map((matrixColumn, columnIndex) => {
-      const unitIsAttackable = true; // TODO look at unitProps, find if current cell is attackable.
-      const inRange = stats.move + stats.range >= (Math.abs(row - rowIndex) + Math.abs(column - columnIndex));
-      const attackable = inRange && unitIsAttackable;
-      return matrixColumn.merge({
-        attackable,
-      });
-    }));
-    this.matrix = this.matrix.set('grid', newGrid);
+  calculateMoves({ row, column, move, range, unitProps }) {
+    this.calculateMove({ row, column, move, range, unitProps });
+
+    const cell = this.getCell({ row, column });
+    if (cell.get('movable') && move >= 0) {
+      this.movement({ row, column, move: move - 1, range, unitProps });
+    } else if (cell.get('attackable') && move > 0 && range > 1) {
+      this.movement({ row, column, move: 0, range: range - 1, unitProps });
+    } else if (cell.get('attackable') && !move && range > 1) {
+      this.movement({ row, column, move, range: range - 1, unitProps });
+    }
   }
 
-  markMovable({ row, column }) {
-    const unitProps = UNITS[this.matrix.get('grid').getIn([row, column, 'unit'])];
-    const newGrid = this.matrix.get('grid').map((matrixRow, rowIndex) => matrixRow.map((matrixColumn, columnIndex) => {
-      const terrainAccessible = true; // TODO look at terrain in unit's Props, if accessible.
-      const occupied = this.matrix.getIn(['grid', rowIndex, columnIndex, 'unit']);
-      const inRange = unitProps.stats.move >= (Math.abs(row - rowIndex) + Math.abs(column - columnIndex));
-      const movable = !occupied && inRange && terrainAccessible;
-      return matrixColumn.merge({
-        movable,
-      });
-    }));
-    this.matrix = this.matrix.set('grid', newGrid);
+  movement({ row, column, move, range, unitProps }) {
+    const north = row - 1;
+    const south = row + 1;
+    const west = column - 1;
+    const east = column + 1;
+    if (north >= 0) {
+      this.calculateMoves({ row: north, column, move, range, unitProps });
+    }
+    if (west >= 0) {
+      this.calculateMoves({ row, column: west, move, range, unitProps });
+    }
+    if (south < this.matrix.get('rows')) {
+      this.calculateMoves({ row: south, column, move, range, unitProps });
+    }
+    if (east < this.matrix.get('columns')) {
+      this.calculateMoves({ row, column: east, move, range, unitProps });
+    }
+  }
+
+  calculateMove({ row, column, move, range, unitProps }) {
+    const cell = this.getCell({ row, column });
+    const occupantUnit = cell.get('unit');
+
+    const attackable = range > 0 && occupantUnit ?
+      unitProps.attacks.includes(UNITS[occupantUnit].type) : true;
+
+    if (attackable) {
+      this.matrix = this.matrix.set('grid', this.matrix.get('grid').mergeIn([row, column, 'attackable'], attackable));
+    }
+
+    const terrain = cell.get('terrain');
+    const occupied = cell.get('unit');
+    const selected = cell.get('selected');
+    const terrainInaccessible = unitProps.inaccessibleTerrain.includes(terrain);
+    const movable = (!occupied || selected) && move > 0 && !terrainInaccessible;
+
+    if (movable) {
+      this.matrix = this.matrix.set('grid', this.matrix.get('grid').mergeIn([row, column, 'movable'], movable));
+    }
+  }
+
+  getCell({ row, column }) {
+    return this.matrix.getIn(['grid', row, column]);
   }
 }
 
