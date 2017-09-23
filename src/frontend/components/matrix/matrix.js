@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { func } from 'prop-types';
 import { connect } from 'react-redux';
 import { times } from 'lodash';
+import classNames from 'classnames';
 import UnitFactory from './../units/unitFactory';
 import TerrainFactory from './../terrain/terrainFactory';
 import mapStateToProps from './selector/mapStateToProps';
@@ -26,15 +27,17 @@ class MatrixView extends Component {
     const selected = cell.get('selected');
     const attackable = cell.get('attackable');
     const movable = cell.get('movable');
+    const actionable = cell.get('actionable');
+    const className = classNames('matrix-cell', { attackable, movable, actionable, selected });
 
-    const key = `matrix-cell-${column}-${row}-${cell.get('terrain')}`;
+    const key = `matrix-cell-${column}-${row}-${terrain}`;
     const children = UnitFactory.createUnit({ player: {}, factoryType: 'LAND', unit });
     return (<td
-      className={`matrix-cell ${selected ? 'selected' : ''} ${attackable ? 'attackable' : ''} ${movable ? 'movable' : ''}`}
+      className={className}
       key={key}
       onClick={() => onCellClick({ terrain, column, row, unit, matrix: this.props.matrix })}
     >
-      {TerrainFactory.createTerrain({ terrain, children })}
+      {TerrainFactory.createTerrain({ terrain, children, row, column })}
     </td>);
   }
 

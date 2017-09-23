@@ -22,6 +22,10 @@ export const TERRAIN = {
   SAND: {},
   OCEAN: {},
   MOUNTAIN: {},
+  LAND_FACTORY: {
+    actionable: true,
+    selectable: true,
+  },
 };
 
 const UNIT_TYPES = {

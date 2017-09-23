@@ -1,5 +1,6 @@
 import {
   UNITS,
+  TERRAIN,
 } from '../../../../shared/sharedConstants';
 
 class BattleMatrix {
@@ -11,12 +12,19 @@ class BattleMatrix {
     this.deselectAllCells();
 
     const unit = this.getUnitAt({ row, column });
-    if (unit) {
+    const terrainProps = TERRAIN[this.getTerrainAt({ row, column })];
+    if (unit || terrainProps.selectable) {
       this.selectCell({ row, column });
+    }
 
+    if (unit) {
       const unitProps = UNITS[unit];
       const stats = unitProps.stats;
       this.calculateMoves({ row, column, move: stats.move, range: stats.range, unitProps });
+    }
+
+    if (terrainProps.actionable) {
+      this.markActionable({ row, column });
     }
 
     return this.matrix.get('grid');
@@ -26,6 +34,10 @@ class BattleMatrix {
     return this.matrix.getIn(['grid', row, column, 'unit']);
   }
 
+  getTerrainAt({ row, column }) {
+    return this.matrix.getIn(['grid', row, column, 'terrain']);
+  }
+
   deselectAllCells() {
     this.matrix = this.matrix.set('grid', this.matrix.get('grid').map(matrixRow => matrixRow.map(matrixColumn =>
       matrixColumn.merge({
@@ -33,11 +45,16 @@ class BattleMatrix {
         attackable: false,
         movable: false,
         visited: false,
+        actionable: false,
       }))));
   }
 
   selectCell({ row, column }) {
     this.matrix = this.matrix.set('grid', this.matrix.get('grid').setIn([row, column, 'selected'], true));
+  }
+
+  markActionable({ row, column }) {
+    this.matrix = this.matrix.set('grid', this.matrix.get('grid').setIn([row, column, 'actionable'], true));
   }
 
   calculateMoves({ row, column, move, range, unitProps }) {
@@ -53,6 +70,8 @@ class BattleMatrix {
     }
   }
 
+  // TODO for performance, use queue?
+  // TODO take in to account selected state. Don't add movable, attackable. Actionable, yes.
   movement({ row, column, move, range, unitProps }) {
     const north = row - 1;
     const south = row + 1;

@@ -19,6 +19,10 @@
         border: 3px solid $matrix-attackable-color;
       }
 
+      &.actionable {
+        border: 3px solid $matrix-actionable-color;
+      }
+
       & > div {
         height: $matrixCellHeight;
         width: $matrixCellWidth;
