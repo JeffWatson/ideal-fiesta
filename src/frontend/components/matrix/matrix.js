@@ -22,6 +22,7 @@ class MatrixView extends Component {
 
   renderCell({ column, row, cell }) {
     const { onCellClick } = this.props;
+    const health = cell.get('health');
     const unit = cell.get('unit');
     const terrain = cell.get('terrain');
     const selected = cell.get('selected');
@@ -37,7 +38,7 @@ class MatrixView extends Component {
       key={key}
       onClick={() => onCellClick({ terrain, column, row, unit, matrix: this.props.matrix })}
     >
-      {TerrainFactory.createTerrain({ terrain, children, row, column })}
+      {TerrainFactory.createTerrain({ terrain, children, row, column, health })}
     </td>);
   }
 

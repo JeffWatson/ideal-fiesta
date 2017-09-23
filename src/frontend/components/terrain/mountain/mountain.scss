@@ -1,5 +1,6 @@
 @import "./../../../app/style/variables";
 
 .mountain-container {
+  @include health-container();
   background-color: $mountain;
 }

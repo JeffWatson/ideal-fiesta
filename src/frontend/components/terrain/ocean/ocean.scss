@@ -1,5 +1,6 @@
 @import "./../../../app/style/variables";
 
 .ocean-container {
+  @include health-container();
   background-color: $ocean;
 }

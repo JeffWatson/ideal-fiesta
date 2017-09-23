@@ -1,5 +1,6 @@
 @import "./../../../app/style/variables";
 
 .grass-container {
+  @include health-container();
   background-color: $grass;
 }

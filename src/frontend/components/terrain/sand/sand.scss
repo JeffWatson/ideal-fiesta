@@ -1,5 +1,6 @@
 @import "./../../../app/style/variables";
 
 .sand-container {
+  @include health-container();
   background-color: $sand;
 }
