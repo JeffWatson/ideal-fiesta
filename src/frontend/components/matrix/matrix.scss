@@ -7,16 +7,16 @@
       width: $matrixCellWidth;
       border: 3px solid $matrix-unselected-color;
 
-      &.selected {
-        border: 3px solid $matrix-selected-color;
-      }
-
       &.movable {
         border: 3px solid $matrix-movable-color;
       }
 
       &.attackable:not(.movable) {
         border: 3px solid $matrix-attackable-color;
+      }
+
+      &.selected {
+        border: 3px solid $matrix-selected-color;
       }
 
       &.actionable {
