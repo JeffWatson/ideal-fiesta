@@ -9,7 +9,7 @@ class BattleMatrix {
     this.matrix = matrix;
   }
 
-  // TODO get selected unit. check its movement range
+  // TODO get selected unit. check its movement range. clicking opponents unit triggers battle?
   onCellClick({ row, column, currentPlayer }) {
     const cell = this.getCell({ row, column });
     if (!cell.get('movable')) {

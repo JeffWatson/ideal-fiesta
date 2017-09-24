@@ -8,20 +8,356 @@ exports[`frontend/app renders correctly 1`] = `
     className="App-header"
   >
     <h2>
-      Welcome to React
+      Welcome to Ideal Fiesta
     </h2>
-    <h3>
-      does webpack work?
-    </h3>
   </div>
-  <p
-    className="App-intro"
+  <div
+    className="matrix"
   >
-    To get started, edit 
-    <code>
-      src/App.js
-    </code>
-     and save to reload.
-  </p>
+    <div
+      className="current-player-info"
+    >
+      The current Player is: 
+      BLUE
+    </div>
+    <table
+      className="matrix-table"
+    >
+      <tbody>
+        <tr
+          className="matrix-row"
+        >
+          <td
+            className="matrix-cell"
+            onClick={[Function]}
+          >
+            <div
+              className="sand-container"
+            >
+              <div>
+                <div
+                  className="unit soldier green"
+                >
+                  Soldier!
+                </div>
+                <div
+                  className="health-container"
+                >
+                  20
+                </div>
+              </div>
+            </div>
+          </td>
+          <td
+            className="matrix-cell"
+            onClick={[Function]}
+          >
+            <div
+              className="sand-container"
+            >
+              <div />
+            </div>
+          </td>
+          <td
+            className="matrix-cell"
+            onClick={[Function]}
+          >
+            <div
+              className="sand-container"
+            >
+              <div />
+            </div>
+          </td>
+          <td
+            className="matrix-cell"
+            onClick={[Function]}
+          >
+            <div
+              className="sand-container"
+            >
+              <div>
+                <div
+                  className="unit soldier red"
+                >
+                  SmallTank!
+                </div>
+                <div
+                  className="health-container"
+                >
+                  20
+                </div>
+              </div>
+            </div>
+          </td>
+          <td
+            className="matrix-cell"
+            onClick={[Function]}
+          >
+            <div
+              className="sand-container"
+            >
+              <div />
+            </div>
+          </td>
+        </tr>
+        <tr
+          className="matrix-row"
+        >
+          <td
+            className="matrix-cell"
+            onClick={[Function]}
+          >
+            <div
+              className="ocean-container"
+            >
+              <div />
+            </div>
+          </td>
+          <td
+            className="matrix-cell"
+            onClick={[Function]}
+          >
+            <div
+              className="ocean-container"
+            >
+              <div />
+            </div>
+          </td>
+          <td
+            className="matrix-cell"
+            onClick={[Function]}
+          >
+            <div
+              className="ocean-container"
+            >
+              <div />
+            </div>
+          </td>
+          <td
+            className="matrix-cell"
+            onClick={[Function]}
+          >
+            <div
+              className="ocean-container"
+            >
+              <div />
+            </div>
+          </td>
+          <td
+            className="matrix-cell"
+            onClick={[Function]}
+          >
+            <div
+              className="land-factory-container"
+              onClick={[Function]}
+            >
+              <div>
+                <div
+                  className="health-container"
+                >
+                  20
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr
+          className="matrix-row"
+        >
+          <td
+            className="matrix-cell"
+            onClick={[Function]}
+          >
+            <div
+              className="grass-container"
+            >
+              <div>
+                <div
+                  className="unit soldier blue"
+                >
+                  Soldier!
+                </div>
+                <div
+                  className="health-container"
+                >
+                  20
+                </div>
+              </div>
+            </div>
+          </td>
+          <td
+            className="matrix-cell"
+            onClick={[Function]}
+          >
+            <div
+              className="sand-container"
+            >
+              <div />
+            </div>
+          </td>
+          <td
+            className="matrix-cell"
+            onClick={[Function]}
+          >
+            <div
+              className="mountain-container"
+            >
+              <div />
+            </div>
+          </td>
+          <td
+            className="matrix-cell"
+            onClick={[Function]}
+          >
+            <div
+              className="sand-container"
+            >
+              <div />
+            </div>
+          </td>
+          <td
+            className="matrix-cell"
+            onClick={[Function]}
+          >
+            <div
+              className="sand-container"
+            >
+              <div />
+            </div>
+          </td>
+        </tr>
+        <tr
+          className="matrix-row"
+        >
+          <td
+            className="matrix-cell"
+            onClick={[Function]}
+          >
+            <div
+              className="sand-container"
+            >
+              <div />
+            </div>
+          </td>
+          <td
+            className="matrix-cell"
+            onClick={[Function]}
+          >
+            <div
+              className="sand-container"
+            >
+              <div />
+            </div>
+          </td>
+          <td
+            className="matrix-cell"
+            onClick={[Function]}
+          >
+            <div
+              className="sand-container"
+            >
+              <div />
+            </div>
+          </td>
+          <td
+            className="matrix-cell"
+            onClick={[Function]}
+          >
+            <div
+              className="grass-container"
+            >
+              <div>
+                <div
+                  className="unit soldier blue"
+                >
+                  SmallTank!
+                </div>
+                <div
+                  className="health-container"
+                >
+                  20
+                </div>
+              </div>
+            </div>
+          </td>
+          <td
+            className="matrix-cell"
+            onClick={[Function]}
+          >
+            <div
+              className="sand-container"
+            >
+              <div />
+            </div>
+          </td>
+        </tr>
+        <tr
+          className="matrix-row"
+        >
+          <td
+            className="matrix-cell"
+            onClick={[Function]}
+          >
+            <div
+              className="sand-container"
+            >
+              <div />
+            </div>
+          </td>
+          <td
+            className="matrix-cell"
+            onClick={[Function]}
+          >
+            <div
+              className="grass-container"
+            >
+              <div />
+            </div>
+          </td>
+          <td
+            className="matrix-cell"
+            onClick={[Function]}
+          >
+            <div
+              className="sand-container"
+            >
+              <div />
+            </div>
+          </td>
+          <td
+            className="matrix-cell"
+            onClick={[Function]}
+          >
+            <div
+              className="sand-container"
+            >
+              <div />
+            </div>
+          </td>
+          <td
+            className="matrix-cell"
+            onClick={[Function]}
+          >
+            <div
+              className="sand-container"
+            >
+              <div>
+                <div
+                  className="unit soldier yellow"
+                >
+                  Soldier!
+                </div>
+                <div
+                  className="health-container"
+                >
+                  20
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 `;
