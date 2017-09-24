@@ -1,3 +1,3 @@
 import Grass from './grass';
 
-export { Grass as default};
+export { Grass as default };

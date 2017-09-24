@@ -1,4 +1,4 @@
 import Soldier from './soldier';
-// export SmallTank from './smallTank';
+import SmallTank from './smallTank';
 
-export { Soldier };
+export default { Soldier, SmallTank };

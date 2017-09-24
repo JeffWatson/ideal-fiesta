@@ -1,7 +1,9 @@
 import eslint from 'gulp-eslint';
 import gulp from 'gulp';
 
-gulp.task('eslint', () => gulp.src(['*.js'])
+const allSource = 'src/**/*.js'
+
+gulp.task('eslint', () => gulp.src([allSource])
   .pipe(eslint({
     config: '.eslintrc.js',
     'max-warnings': 0,
@@ -9,7 +11,7 @@ gulp.task('eslint', () => gulp.src(['*.js'])
   .pipe(eslint.format())
   .pipe(eslint.failAfterError()));
 
-gulp.task('eslint-fix', () => gulp.src(['*.js'])
+gulp.task('eslint-fix', () => gulp.src([allSource])
   .pipe(eslint({
     config: '.eslintrc.js',
     fix: true,

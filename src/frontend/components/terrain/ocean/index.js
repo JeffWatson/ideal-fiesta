@@ -1,3 +1,3 @@
 import Ocean from './ocean';
 
-export { Ocean as default};
+export { Ocean as default };
