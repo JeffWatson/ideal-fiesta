@@ -98,7 +98,8 @@ class BattleMatrix {
     this.markMoveDirection({ row, column, moveDirection });
   }
 
-  // TODO this needs serious refactoring... I can probably reuse some logic? not sure. for updating cells.
+  // TODO this needs serious refactoring...
+  // I can probably reuse some logic? not sure. for updating cells.
   // This is terrible. Seriously. What am I doing with myself?
   updateMovePath({ row, column }) {
     const tail = this.getTail();
@@ -193,6 +194,7 @@ class BattleMatrix {
         tail = matrixColumn.merge({ row, column });
         return true;
       }
+      return false;
     }));
 
     return tail;
@@ -260,7 +262,8 @@ class BattleMatrix {
     return some(queue, object => isEqual(object, findMe));
   }
 
-  // TODO unit combination. take into account health. combine like units with sum of health < MAX_HEALTH
+  // TODO unit combination. take into account health.
+  // TODO combine like units with sum of health < MAX_HEALTH
   // TODO terrain modifiers, mountains should be harder to climb, sand too, etc...
   calculateMove({ row, column, move, range, unitProps, currentPlayer }) {
     const cell = this.getCell({ row, column });

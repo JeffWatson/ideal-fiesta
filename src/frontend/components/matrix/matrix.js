@@ -65,6 +65,7 @@ class MatrixView extends Component {
   }
 }
 
+// TODO proper propTypes of matrix would be nice.
 MatrixView.propTypes = {
   onCellClick: func.isRequired,
 };
