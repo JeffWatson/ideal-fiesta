@@ -30,6 +30,7 @@ class MatrixView extends Component {
     const movable = cell.get('movable');
     const actionable = cell.get('actionable');
     const player = cell.get('player');
+    const moveDirection = cell.get('moveDirection');
     const className = classNames('matrix-cell', { attackable, movable, actionable, selected });
 
     const key = `matrix-cell-${column}-${row}-${terrain}`;
@@ -37,9 +38,15 @@ class MatrixView extends Component {
     return (<td
       className={className}
       key={key}
-      onClick={() => onCellClick({ terrain, column, row, unit, matrix: this.props.matrix, currentPlayer })}
+      onClick={() => onCellClick({ terrain,
+        column,
+        row,
+        unit,
+        matrix: this.props.matrix,
+        currentPlayer,
+      })}
     >
-      {TerrainFactory.createTerrain({ terrain, children, row, column, health })}
+      {TerrainFactory.createTerrain({ terrain, children, row, column, health, moveDirection })}
     </td>);
   }
 

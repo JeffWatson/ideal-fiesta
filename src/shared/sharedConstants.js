@@ -111,3 +111,16 @@ export const UNITS = {
     name: 'SUBMARINE',
   },
 };
+
+export const MOVE_PATH_TYPES = [
+  'NORTH_END',
+  'EAST_END',
+  'SOUTH_END',
+  'WEST_END',
+  'NORTH_EAST',
+  'NORTH_SOUTH',
+  'NORTH_WEST',
+  'SOUTH_EAST',
+  'SOUTH_WEST',
+  'EAST_WEST',
+];

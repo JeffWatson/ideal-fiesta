@@ -8,20 +8,24 @@ import Mountain from './../mountain';
 import LandFactory from './../landFactory';
 
 import Health from './health';
+import MovePath from './movePath';
 
 export default class UnitFactory {
-  static createTerrain({ terrain, children, player, row, column, health }) { // TODO convert to arg?
+  static createTerrain({ terrain, children, player, row, column, health, moveDirection }) { // TODO convert to arg?
     const terrainProps = { terrain: TERRAIN[terrain], player, row, column };
 
     const healthMarker = health ? (<Health health={health} />) : null;
+    const pathMarker = moveDirection ? (<MovePath direction={moveDirection} />) : null;
+
+    const contents = (<div>{ children }{ pathMarker }{ healthMarker }</div>);
 
     switch (TERRAIN_TYPES[terrain]) {
-    case TERRAIN_TYPES.GRASS: return (<Grass {...terrainProps} >{ children }{ healthMarker }</Grass>);
-    case TERRAIN_TYPES.SAND: return (<Sand {...terrainProps} >{ children }{ healthMarker }</Sand>);
-    case TERRAIN_TYPES.OCEAN: return (<Ocean {...terrainProps} >{ children }{ healthMarker }</Ocean>);
-    case TERRAIN_TYPES.MOUNTAIN: return (<Mountain {...terrainProps} >{ children }{ healthMarker }</Mountain>);
+    case TERRAIN_TYPES.GRASS: return (<Grass {...terrainProps} >{ contents }</Grass>);
+    case TERRAIN_TYPES.SAND: return (<Sand {...terrainProps} >{ contents }</Sand>);
+    case TERRAIN_TYPES.OCEAN: return (<Ocean {...terrainProps} >{ contents }</Ocean>);
+    case TERRAIN_TYPES.MOUNTAIN: return (<Mountain {...terrainProps} >{ contents }</Mountain>);
 
-    case TERRAIN_TYPES.LAND_FACTORY: return (<LandFactory {...terrainProps}>{ children }{ healthMarker }</LandFactory>);
+    case TERRAIN_TYPES.LAND_FACTORY: return (<LandFactory {...terrainProps}>{ contents }</LandFactory>);
     default: return null;
     }
   }
