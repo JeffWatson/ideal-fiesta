@@ -20,10 +20,17 @@ module.exports = {
         },
         test: /\.js$/,
       },
+      {
+        test: /\.(jpe?g|png|gif|svg)$/i,
+        loaders: [
+          'url-loader?limit=10000',
+        ],
+      },
     ],
   },
   output: {
-    filename: 'public/bundle.js',
+    filename: 'bundle.js',
     path: __dirname,
+    publicPath: 'public/',
   },
 };

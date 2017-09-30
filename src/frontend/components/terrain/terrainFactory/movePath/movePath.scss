@@ -1,0 +1,40 @@
+.movePath {
+  height: 100px;
+  &.NORTH_END {
+    background: url('./images/north.png');
+  }
+  &.EAST_END {
+    background: url('./images/east.png');
+  }
+  &.SOUTH_END {
+    background: url('./images/south.png');
+  }
+  &.WEST_END {
+    background: url('./images/west.png');
+  }
+  &.NORTH_EAST {
+    background: url('./images/diag.png');
+    transform: rotate(45deg);
+  }
+  &.NORTH_SOUTH {
+    background: url('./images/north-south.png');
+  }
+  &.NORTH_WEST {
+    background: url('./images/diag.png');
+    transform: rotate(-45deg);
+  }
+  &.SOUTH_EAST {
+    background: url('./images/diag.png');
+    transform: rotate(135deg);
+  }
+  &.SOUTH_WEST {
+    background: url('./images/diag.png');
+    transform: rotate(-135deg);
+  }
+  &.EAST_WEST {
+    background: url('./images/east-west.png');
+  }
+  .ATTACK {
+    background: url('./images/attack.png');
+  }
+}

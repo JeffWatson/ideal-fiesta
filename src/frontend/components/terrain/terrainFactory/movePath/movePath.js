@@ -3,11 +3,13 @@ import { oneOf } from 'prop-types';
 import classnames from 'classnames';
 import { MOVE_PATH_TYPES } from '../../../../../shared/sharedConstants';
 
+import './movePath.scss';
+
 const MovePath = (props) => {
   const { direction } = props;
   const className = classnames('movePath', direction);
 
-  return (<div className={className} >{ direction }</div>);
+  return (<div className={className} />);
 };
 
 MovePath.propTypes = {
