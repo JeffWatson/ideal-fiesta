@@ -1,3 +1,7 @@
 @mixin health-container () {
   position: relative;
 }
+
+@mixin matrix-container($color) {
+  background: linear-gradient(315deg, rgba($color, .85), rgba($color, .25) 25%, rgba($color, .15));
+}
