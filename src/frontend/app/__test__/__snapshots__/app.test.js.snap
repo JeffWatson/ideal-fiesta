@@ -77,7 +77,7 @@ exports[`frontend/app renders correctly 1`] = `
             >
               <div>
                 <div
-                  className="unit soldier red"
+                  className="unit smallTank red"
                 >
                   SmallTank!
                 </div>
@@ -268,7 +268,7 @@ exports[`frontend/app renders correctly 1`] = `
             >
               <div>
                 <div
-                  className="unit soldier blue"
+                  className="unit smallTank blue"
                 >
                   SmallTank!
                 </div>

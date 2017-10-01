@@ -2,7 +2,7 @@ import { isEqual, some } from 'lodash';
 import {
   UNITS,
   TERRAIN,
-  MOVE_PATH_TYPES,
+  MOVE_PATH_VALUES,
 } from '../../../../shared/sharedConstants';
 
 class BattleMatrix {
@@ -112,13 +112,13 @@ class BattleMatrix {
 
     let previousDirectionUpdate;
     if (row === tailRow && column - 1 === tailColumn) {
-      if (tailMoveDirection === MOVE_PATH_TYPES.NORTH_END) {
-        previousDirectionUpdate = MOVE_PATH_TYPES.SOUTH_EAST;
-      } else if (tailMoveDirection === MOVE_PATH_TYPES.SOUTH_END) {
-        previousDirectionUpdate = MOVE_PATH_TYPES.NORTH_EAST;
-      } else if (tailMoveDirection === MOVE_PATH_TYPES.EAST_END) {
-        previousDirectionUpdate = MOVE_PATH_TYPES.EAST_WEST;
-      } else if (tailMoveDirection === MOVE_PATH_TYPES.WEST_END) { // TODO traveling backwards?
+      if (tailMoveDirection === MOVE_PATH_VALUES.NORTH_END) {
+        previousDirectionUpdate = MOVE_PATH_VALUES.SOUTH_EAST;
+      } else if (tailMoveDirection === MOVE_PATH_VALUES.SOUTH_END) {
+        previousDirectionUpdate = MOVE_PATH_VALUES.NORTH_EAST;
+      } else if (tailMoveDirection === MOVE_PATH_VALUES.EAST_END) {
+        previousDirectionUpdate = MOVE_PATH_VALUES.EAST_WEST;
+      } else if (tailMoveDirection === MOVE_PATH_VALUES.WEST_END) { // TODO traveling backwards?
         console.log('you\'re traveling backwards. this is a weird case.');
         previousDirectionUpdate = undefined;
       } else {
@@ -128,17 +128,17 @@ class BattleMatrix {
         row: tailRow,
         column: tailColumn,
         moveDirection: previousDirectionUpdate });
-      this.updateMoveDirection({ row, column, moveDirection: MOVE_PATH_TYPES.EAST_END });
+      this.updateMoveDirection({ row, column, moveDirection: MOVE_PATH_VALUES.EAST_END });
     } else if (row === tailRow && column + 1 === tailColumn) {
-      if (tailMoveDirection === MOVE_PATH_TYPES.NORTH_END) {
-        previousDirectionUpdate = MOVE_PATH_TYPES.SOUTH_WEST;
-      } else if (tailMoveDirection === MOVE_PATH_TYPES.SOUTH_END) {
-        previousDirectionUpdate = MOVE_PATH_TYPES.NORTH_WEST;
-      } else if (tailMoveDirection === MOVE_PATH_TYPES.EAST_END) { // TODO traveling backwards?
+      if (tailMoveDirection === MOVE_PATH_VALUES.NORTH_END) {
+        previousDirectionUpdate = MOVE_PATH_VALUES.SOUTH_WEST;
+      } else if (tailMoveDirection === MOVE_PATH_VALUES.SOUTH_END) {
+        previousDirectionUpdate = MOVE_PATH_VALUES.NORTH_WEST;
+      } else if (tailMoveDirection === MOVE_PATH_VALUES.EAST_END) { // TODO traveling backwards?
         console.log('you\'re traveling backwards. this is a weird case.');
         previousDirectionUpdate = undefined;
-      } else if (tailMoveDirection === MOVE_PATH_TYPES.WEST_END) {
-        previousDirectionUpdate = MOVE_PATH_TYPES.EAST_WEST;
+      } else if (tailMoveDirection === MOVE_PATH_VALUES.WEST_END) {
+        previousDirectionUpdate = MOVE_PATH_VALUES.EAST_WEST;
       } else {
         console.log('this shouldn\'t be possible... WEST');
       }
@@ -146,17 +146,17 @@ class BattleMatrix {
         row: tailRow,
         column: tailColumn,
         moveDirection: previousDirectionUpdate });
-      this.updateMoveDirection({ row, column, moveDirection: MOVE_PATH_TYPES.WEST_END });
+      this.updateMoveDirection({ row, column, moveDirection: MOVE_PATH_VALUES.WEST_END });
     } else if (column === tailColumn && row + 1 === tailRow) {
-      if (tailMoveDirection === MOVE_PATH_TYPES.NORTH_END) {
-        previousDirectionUpdate = MOVE_PATH_TYPES.NORTH_SOUTH;
-      } else if (tailMoveDirection === MOVE_PATH_TYPES.SOUTH_END) { // TODO traveling backwards?
+      if (tailMoveDirection === MOVE_PATH_VALUES.NORTH_END) {
+        previousDirectionUpdate = MOVE_PATH_VALUES.NORTH_SOUTH;
+      } else if (tailMoveDirection === MOVE_PATH_VALUES.SOUTH_END) { // TODO traveling backwards?
         console.log('you\'re traveling backwards. this is a weird case.');
         previousDirectionUpdate = undefined;
-      } else if (tailMoveDirection === MOVE_PATH_TYPES.EAST_END) {
-        previousDirectionUpdate = MOVE_PATH_TYPES.NORTH_WEST;
-      } else if (tailMoveDirection === MOVE_PATH_TYPES.WEST_END) {
-        previousDirectionUpdate = MOVE_PATH_TYPES.NORTH_EAST;
+      } else if (tailMoveDirection === MOVE_PATH_VALUES.EAST_END) {
+        previousDirectionUpdate = MOVE_PATH_VALUES.NORTH_WEST;
+      } else if (tailMoveDirection === MOVE_PATH_VALUES.WEST_END) {
+        previousDirectionUpdate = MOVE_PATH_VALUES.NORTH_EAST;
       } else {
         console.log('this shouldn\'t be possible... NORTH');
       }
@@ -164,17 +164,17 @@ class BattleMatrix {
         row: tailRow,
         column: tailColumn,
         moveDirection: previousDirectionUpdate });
-      this.updateMoveDirection({ row, column, moveDirection: MOVE_PATH_TYPES.NORTH_END });
+      this.updateMoveDirection({ row, column, moveDirection: MOVE_PATH_VALUES.NORTH_END });
     } else if (column === tailColumn && row - 1 === tailRow) {
-      if (tailMoveDirection === MOVE_PATH_TYPES.NORTH_END) { // TODO traveling backwards?
+      if (tailMoveDirection === MOVE_PATH_VALUES.NORTH_END) { // TODO traveling backwards?
         console.log('you\'re traveling backwards. this is a weird case.');
         previousDirectionUpdate = undefined;
-      } else if (tailMoveDirection === MOVE_PATH_TYPES.SOUTH_END) {
-        previousDirectionUpdate = MOVE_PATH_TYPES.NORTH_SOUTH;
-      } else if (tailMoveDirection === MOVE_PATH_TYPES.EAST_END) {
-        previousDirectionUpdate = MOVE_PATH_TYPES.SOUTH_WEST;
-      } else if (tailMoveDirection === MOVE_PATH_TYPES.WEST_END) {
-        previousDirectionUpdate = MOVE_PATH_TYPES.SOUTH_EAST;
+      } else if (tailMoveDirection === MOVE_PATH_VALUES.SOUTH_END) {
+        previousDirectionUpdate = MOVE_PATH_VALUES.NORTH_SOUTH;
+      } else if (tailMoveDirection === MOVE_PATH_VALUES.EAST_END) {
+        previousDirectionUpdate = MOVE_PATH_VALUES.SOUTH_WEST;
+      } else if (tailMoveDirection === MOVE_PATH_VALUES.WEST_END) {
+        previousDirectionUpdate = MOVE_PATH_VALUES.SOUTH_EAST;
       } else {
         console.log('this shouldn\'t be possible... SOUTH');
       }
@@ -182,7 +182,7 @@ class BattleMatrix {
         row: tailRow,
         column: tailColumn,
         moveDirection: previousDirectionUpdate });
-      this.updateMoveDirection({ row, column, moveDirection: MOVE_PATH_TYPES.SOUTH_END });
+      this.updateMoveDirection({ row, column, moveDirection: MOVE_PATH_VALUES.SOUTH_END });
     } else {
       this.moveUnit({ row, column });
       this.deselectAllCells();
