@@ -1,6 +1,9 @@
 @import "../../../app/style/variables";
 
 .unit {
+  &.disabled {
+    background-color: $disabled;
+  }
   &.yellow {
     color: $yellow;
   }

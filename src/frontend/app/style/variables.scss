@@ -18,9 +18,10 @@ $landFactory: #666666;
 $matrixCellHeight: 100px;
 $matrixCellWidth: 100px;
 
-// TODO make mixin for these...
 $matrix-unselected-color: $white;
 $matrix-selected-color: $black;
 $matrix-movable-color: $blue;
 $matrix-attackable-color: $red;
 $matrix-actionable-color: $green;
+
+$disabled: #999999;

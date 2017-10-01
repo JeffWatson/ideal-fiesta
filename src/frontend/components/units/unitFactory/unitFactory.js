@@ -9,8 +9,8 @@ import Artillery from './../artillery';
 import './units.scss';
 
 export default class UnitFactory {
-  static createUnit({ unit, player }) {
-    const unitProps = extend(UNITS[unit], { player: toLower(player) });
+  static createUnit({ unit, player, disabled }) {
+    const unitProps = extend(UNITS[unit], { player: toLower(player), disabled });
 
     switch (unitProps.name) {
     case UNITS.SOLDIER.name: return (<Soldier {...unitProps} />);

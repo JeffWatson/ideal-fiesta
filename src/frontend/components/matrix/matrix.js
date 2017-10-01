@@ -31,10 +31,11 @@ class MatrixView extends Component {
     const actionable = cell.get('actionable');
     const player = cell.get('player');
     const moveDirection = cell.get('moveDirection');
+    const disabled = cell.get('disabled');
     const className = classNames('matrix-cell', { attackable, movable, actionable, selected });
 
     const key = `matrix-cell-${column}-${row}-${terrain}`;
-    const children = UnitFactory.createUnit({ player, factoryType: 'LAND', unit });
+    const children = UnitFactory.createUnit({ player, factoryType: 'LAND', unit, disabled });
     return (<td
       className={className}
       key={key}

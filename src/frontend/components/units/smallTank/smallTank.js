@@ -1,12 +1,21 @@
 import React from 'react';
-import { string } from 'prop-types';
+import { bool, string } from 'prop-types';
+import classnames from 'classnames';
 
-const SmallTank = ({ player }) => (<div className={`unit soldier ${player}`}>
-  SmallTank!
-</div>);
+const SmallTank = ({ player, disabled }) => {
+  const className = classnames('unit smallTank', player, { disabled });
+  return (<div className={className}>
+    SmallTank!
+  </div>);
+};
 
 SmallTank.propTypes = {
   player: string.isRequired,
+  disabled: bool,
+};
+
+SmallTank.defaultProps = {
+  disabled: false,
 };
 
 export default SmallTank;

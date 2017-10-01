@@ -2,6 +2,7 @@ import { isEqual, some } from 'lodash';
 import {
   UNITS,
   TERRAIN,
+  MOVE_PATH_TYPES,
 } from '../../../../shared/sharedConstants';
 
 class BattleMatrix {
@@ -23,9 +24,10 @@ class BattleMatrix {
         this.selectCell({ row, column });
       }
 
-      if (unit) {
+      if (unit && !cell.get('disabled')) {
         const unitProps = UNITS[unit];
         const stats = unitProps.stats;
+        this.matrix = this.matrix.set('activeUnit', { row, column });
         this.calculateMoves({
           row,
           column,
@@ -43,7 +45,7 @@ class BattleMatrix {
       this.updateMovePath({ row, column });
     }
 
-    return this.matrix.get('grid');
+    return this.matrix;
   }
 
   getUnitAt({ row, column }) {
@@ -108,16 +110,15 @@ class BattleMatrix {
 
     const tailMoveDirection = tail.get('moveDirection');
 
-    // TODO use enum
     let previousDirectionUpdate;
     if (row === tailRow && column - 1 === tailColumn) {
-      if (tailMoveDirection === 'NORTH_END') {
-        previousDirectionUpdate = 'SOUTH_EAST';
-      } else if (tailMoveDirection === 'SOUTH_END') {
-        previousDirectionUpdate = 'NORTH_EAST';
-      } else if (tailMoveDirection === 'EAST_END') {
-        previousDirectionUpdate = 'EAST_WEST';
-      } else if (tailMoveDirection === 'WEST_END') { // TODO traveling backwards?
+      if (tailMoveDirection === MOVE_PATH_TYPES.NORTH_END) {
+        previousDirectionUpdate = MOVE_PATH_TYPES.SOUTH_EAST;
+      } else if (tailMoveDirection === MOVE_PATH_TYPES.SOUTH_END) {
+        previousDirectionUpdate = MOVE_PATH_TYPES.NORTH_EAST;
+      } else if (tailMoveDirection === MOVE_PATH_TYPES.EAST_END) {
+        previousDirectionUpdate = MOVE_PATH_TYPES.EAST_WEST;
+      } else if (tailMoveDirection === MOVE_PATH_TYPES.WEST_END) { // TODO traveling backwards?
         console.log('you\'re traveling backwards. this is a weird case.');
         previousDirectionUpdate = undefined;
       } else {
@@ -127,17 +128,17 @@ class BattleMatrix {
         row: tailRow,
         column: tailColumn,
         moveDirection: previousDirectionUpdate });
-      this.updateMoveDirection({ row, column, moveDirection: 'EAST_END' });
+      this.updateMoveDirection({ row, column, moveDirection: MOVE_PATH_TYPES.EAST_END });
     } else if (row === tailRow && column + 1 === tailColumn) {
-      if (tailMoveDirection === 'NORTH_END') {
-        previousDirectionUpdate = 'SOUTH_WEST';
-      } else if (tailMoveDirection === 'SOUTH_END') {
-        previousDirectionUpdate = 'NORTH_WEST';
-      } else if (tailMoveDirection === 'EAST_END') { // TODO traveling backwards?
+      if (tailMoveDirection === MOVE_PATH_TYPES.NORTH_END) {
+        previousDirectionUpdate = MOVE_PATH_TYPES.SOUTH_WEST;
+      } else if (tailMoveDirection === MOVE_PATH_TYPES.SOUTH_END) {
+        previousDirectionUpdate = MOVE_PATH_TYPES.NORTH_WEST;
+      } else if (tailMoveDirection === MOVE_PATH_TYPES.EAST_END) { // TODO traveling backwards?
         console.log('you\'re traveling backwards. this is a weird case.');
         previousDirectionUpdate = undefined;
-      } else if (tailMoveDirection === 'WEST_END') {
-        previousDirectionUpdate = 'EAST_WEST';
+      } else if (tailMoveDirection === MOVE_PATH_TYPES.WEST_END) {
+        previousDirectionUpdate = MOVE_PATH_TYPES.EAST_WEST;
       } else {
         console.log('this shouldn\'t be possible... WEST');
       }
@@ -145,17 +146,17 @@ class BattleMatrix {
         row: tailRow,
         column: tailColumn,
         moveDirection: previousDirectionUpdate });
-      this.updateMoveDirection({ row, column, moveDirection: 'WEST_END' });
+      this.updateMoveDirection({ row, column, moveDirection: MOVE_PATH_TYPES.WEST_END });
     } else if (column === tailColumn && row + 1 === tailRow) {
-      if (tailMoveDirection === 'NORTH_END') {
-        previousDirectionUpdate = 'NORTH_SOUTH';
-      } else if (tailMoveDirection === 'SOUTH_END') { // TODO traveling backwards?
+      if (tailMoveDirection === MOVE_PATH_TYPES.NORTH_END) {
+        previousDirectionUpdate = MOVE_PATH_TYPES.NORTH_SOUTH;
+      } else if (tailMoveDirection === MOVE_PATH_TYPES.SOUTH_END) { // TODO traveling backwards?
         console.log('you\'re traveling backwards. this is a weird case.');
         previousDirectionUpdate = undefined;
-      } else if (tailMoveDirection === 'EAST_END') {
-        previousDirectionUpdate = 'NORTH_WEST';
-      } else if (tailMoveDirection === 'WEST_END') {
-        previousDirectionUpdate = 'NORTH_EAST';
+      } else if (tailMoveDirection === MOVE_PATH_TYPES.EAST_END) {
+        previousDirectionUpdate = MOVE_PATH_TYPES.NORTH_WEST;
+      } else if (tailMoveDirection === MOVE_PATH_TYPES.WEST_END) {
+        previousDirectionUpdate = MOVE_PATH_TYPES.NORTH_EAST;
       } else {
         console.log('this shouldn\'t be possible... NORTH');
       }
@@ -163,17 +164,17 @@ class BattleMatrix {
         row: tailRow,
         column: tailColumn,
         moveDirection: previousDirectionUpdate });
-      this.updateMoveDirection({ row, column, moveDirection: 'NORTH_END' });
+      this.updateMoveDirection({ row, column, moveDirection: MOVE_PATH_TYPES.NORTH_END });
     } else if (column === tailColumn && row - 1 === tailRow) {
-      if (tailMoveDirection === 'NORTH_END') { // TODO traveling backwards?
+      if (tailMoveDirection === MOVE_PATH_TYPES.NORTH_END) { // TODO traveling backwards?
         console.log('you\'re traveling backwards. this is a weird case.');
         previousDirectionUpdate = undefined;
-      } else if (tailMoveDirection === 'SOUTH_END') {
-        previousDirectionUpdate = 'NORTH_SOUTH';
-      } else if (tailMoveDirection === 'EAST_END') {
-        previousDirectionUpdate = 'SOUTH_WEST';
-      } else if (tailMoveDirection === 'WEST_END') {
-        previousDirectionUpdate = 'SOUTH_EAST';
+      } else if (tailMoveDirection === MOVE_PATH_TYPES.SOUTH_END) {
+        previousDirectionUpdate = MOVE_PATH_TYPES.NORTH_SOUTH;
+      } else if (tailMoveDirection === MOVE_PATH_TYPES.EAST_END) {
+        previousDirectionUpdate = MOVE_PATH_TYPES.SOUTH_WEST;
+      } else if (tailMoveDirection === MOVE_PATH_TYPES.WEST_END) {
+        previousDirectionUpdate = MOVE_PATH_TYPES.SOUTH_EAST;
       } else {
         console.log('this shouldn\'t be possible... SOUTH');
       }
@@ -181,10 +182,19 @@ class BattleMatrix {
         row: tailRow,
         column: tailColumn,
         moveDirection: previousDirectionUpdate });
-      this.updateMoveDirection({ row, column, moveDirection: 'SOUTH_END' });
+      this.updateMoveDirection({ row, column, moveDirection: MOVE_PATH_TYPES.SOUTH_END });
     } else {
-      console.log('hmmm, that\'ll take some thinking....');
+      this.moveUnit({ row, column });
+      this.deselectAllCells();
     }
+  }
+
+  moveUnit({ row, column }) {
+    const activeUnit = this.matrix.get('activeUnit');
+    const cell = this.matrix.getIn(['grid', activeUnit.row, activeUnit.column]);
+
+    this.matrix = this.matrix.mergeIn(['grid', row, column], { unit: cell.get('unit'), player: cell.get('player'), disabled: true, health: cell.get('health') });
+    this.matrix = this.matrix.mergeIn(['grid', activeUnit.row, activeUnit.column], { unit: undefined, player: undefined, health: undefined });
   }
 
   getTail() {
@@ -239,27 +249,24 @@ class BattleMatrix {
 
   calculateNextMoves(operation, queue) {
     const { row, column, move, range, unitProps, currentPlayer } = operation;
+    const isInQueue = (q, findMe) => some(q, object => isEqual(object, findMe));
 
     const north = { row: row - 1, column, move, range, unitProps, currentPlayer };
     const south = { row: row + 1, column, move, range, unitProps, currentPlayer };
     const west = { row, column: column - 1, move, range, unitProps, currentPlayer };
     const east = { row, column: column + 1, move, range, unitProps, currentPlayer };
-    if (north.row >= 0 && !this.isInQueue(queue, north)) {
+    if (north.row >= 0 && !isInQueue(queue, north)) {
       queue.push(north);
     }
-    if (west.column >= 0 && !this.isInQueue(queue, west)) {
+    if (west.column >= 0 && !isInQueue(queue, west)) {
       queue.push(west);
     }
-    if (south.row < this.matrix.get('rows') && !this.isInQueue(queue, south)) {
+    if (south.row < this.matrix.get('rows') && !isInQueue(queue, south)) {
       queue.push(south);
     }
-    if (east.column < this.matrix.get('columns') && !this.isInQueue(queue, east)) {
+    if (east.column < this.matrix.get('columns') && !isInQueue(queue, east)) {
       queue.push(east);
     }
-  }
-
-  isInQueue(queue, findMe) {
-    return some(queue, object => isEqual(object, findMe));
   }
 
   // TODO unit combination. take into account health.
