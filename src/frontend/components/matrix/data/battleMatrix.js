@@ -13,6 +13,8 @@ class BattleMatrix {
   // TODO get selected unit. check its movement range. clicking opponents unit triggers battle?
   onCellClick({ row, column, currentPlayer }) {
     const cell = this.getCell({ row, column });
+    const selectedCell = this.getSelectedCell();
+
     if (!cell.get('movable')) {
       this.deselectAllCells();
 
@@ -41,6 +43,8 @@ class BattleMatrix {
       if (terrainProps.actionable) {
         this.markActionable({ row, column });
       }
+    } else if (selectedCell && selectedCell.get('row') === row && selectedCell.get('column') === column) {
+      this.deselectAllCells();
     } else {
       this.updateMovePath({ row, column });
     }
@@ -100,14 +104,39 @@ class BattleMatrix {
     this.markMoveDirection({ row, column, moveDirection });
   }
 
+  getMoveDistance() {
+    return this.matrix.get('grid').reduce((memo, matrixRow) => memo += matrixRow.count(matrixColumn => matrixColumn.get('moveDirection')), 0);
+  }
+
+  getSelectedCell() {
+    let selected;
+    this.matrix.get('grid').find((matrixRow, row) => matrixRow.find((matrixColumn, column) => {
+      if (matrixColumn.get('selected')) {
+        selected = matrixColumn.merge({ row, column });
+        return true;
+      }
+      return false;
+    }));
+
+    return selected;
+  }
+
   // TODO this needs serious refactoring...
   // I can probably reuse some logic? not sure. for updating cells.
   // This is terrible. Seriously. What am I doing with myself?
   updateMovePath({ row, column }) {
     const tail = this.getTail();
+    const previousMoveDistance = this.getMoveDistance();
+    const selectedUnitMaxMovement = UNITS[this.getSelectedCell().get('unit')].stats.move;
+    const isTailClick = tail.get('row') === row && tail.get('column') === column;
+
+    if (!isTailClick && previousMoveDistance >= selectedUnitMaxMovement) {
+      // TODO remove moveable from non-path cells. update attackable to reflect from movement
+      return;
+    }
+
     const tailColumn = tail.get('column');
     const tailRow = tail.get('row');
-
     const tailMoveDirection = tail.get('moveDirection');
 
     let previousDirectionUpdate;
@@ -183,8 +212,10 @@ class BattleMatrix {
         column: tailColumn,
         moveDirection: previousDirectionUpdate });
       this.updateMoveDirection({ row, column, moveDirection: MOVE_PATH_VALUES.SOUTH_END });
-    } else {
+    } else if (isTailClick) {
       this.moveUnit({ row, column });
+      this.deselectAllCells();
+    } else {
       this.deselectAllCells();
     }
   }
