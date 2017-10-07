@@ -14,54 +14,67 @@ class BattleMatrix {
     const cell = this.getCell({ row, column });
     const selectedCell = this.getSelectedCell();
     const disabled = cell.get('disabled');
+    const movable = cell.get('movable');
+    const attackable = cell.get('attackable');
+    const moveDirection = cell.get('moveDirection');
+    const unit = cell.get('unit');
+    const isCurrentPlayer = cell.get('player') === currentPlayer;
+    const terrainProps = TERRAIN[this.getTerrainAt({ row, column })];
 
-    if (!selectedCell && !cell.get('movable')) {
+    if (!selectedCell) {
       this.deselectAllCells();
-
-      const unit = this.getUnitAt({ row, column });
-      const isCurrentPlayer = this.getCell({ row, column }).get('player') === currentPlayer;
-
-      const terrainProps = TERRAIN[this.getTerrainAt({ row, column })];
-      if (terrainProps.selectable || (unit && isCurrentPlayer && !disabled)) {
-        this.selectCell({ row, column });
+      if (!movable) {
+        this.handleNoSelectionNotMovable({ row, column, terrainProps, unit, isCurrentPlayer, currentPlayer, disabled });
       }
-
-      if (unit && !disabled) {
-        const unitProps = UNITS[unit];
-        const stats = unitProps.stats;
-        this.matrix = this.matrix.set('activeUnit', { row, column });
-        this.calculateMoves({
-          row,
-          column,
-          move: stats.move,
-          range: stats.range,
-          unitProps,
-          currentPlayer,
-        });
-      }
-
-      if (terrainProps.actionable) {
-        this.markActionable({ row, column });
-      }
-    } else if (selectedCell && cell.get('attackable') && !cell.get('moveDirection') && cell.get('unit') && cell.get('player') !== currentPlayer) {
-      this.markAttacking({ row, column });
-    } else if (selectedCell && cell.get('attackable') && cell.get('moveDirection') === MOVE_PATH_VALUES.ATTACKING && cell.get('unit') && cell.get('player') !== currentPlayer) {
-      const tail = this.getTail();
-      const tailRow = tail.get('row');
-      const tailColumn = tail.get('column');
-      this.moveUnit({ row: tailRow, column: tailColumn });
-      this.deselectAllCells();
-      this.attack({ fromRow: tailRow, fromColumn: tailColumn, toRow: row, toColumn: column });
-    } else if ((selectedCell && selectedCell.get('row') === row && selectedCell.get('column') === column) || !selectedCell) {
-      this.deselectAllCells();
-    } else if (selectedCell && !disabled) {
-      this.updateMovePath({ row, column });
+    } else {
+      this.handleSelectedCellClick({ row, column, selectedCell, isCurrentPlayer, unit, moveDirection, attackable, disabled });
     }
 
     return this.matrix;
   }
 
-  attack({ fromRow, fromColumn, toRow, toColumn }) {
+  handleSelectedCellClick({ row, column, selectedCell, isCurrentPlayer, unit, moveDirection, attackable, disabled }) {
+    if (attackable && !moveDirection && unit && !isCurrentPlayer) { // clicking on enemy
+      this.markAttacking({ row, column });
+    } else if (attackable && moveDirection === MOVE_PATH_VALUES.ATTACKING && unit && !isCurrentPlayer) { // attacking enemy
+      const tail = this.getTail();
+      const tailRow = tail.get('row');
+      const tailColumn = tail.get('column');
+      this.moveUnit({ row: tailRow, column: tailColumn });
+      this.deselectAllCells();
+      this.executeAttack({ fromRow: tailRow, fromColumn: tailColumn, toRow: row, toColumn: column });
+    } else if (selectedCell.get('row') === row && selectedCell.get('column') === column) { // deselecting selected unit
+      this.deselectAllCells();
+    } else if (!disabled) { // movement
+      this.updateMovePath({ row, column });
+    }
+  }
+
+  handleNoSelectionNotMovable({ row, column, terrainProps, unit, isCurrentPlayer, currentPlayer, disabled }) {
+    if (terrainProps.actionable) {
+      this.markActionable({ row, column });
+    }
+
+    if (terrainProps.selectable || (unit && isCurrentPlayer && !disabled)) {
+      this.selectCell({ row, column });
+    }
+
+    if (unit && !disabled) {
+      const unitProps = UNITS[unit];
+      const stats = unitProps.stats;
+      this.matrix = this.matrix.set('activeUnit', { row, column });
+      this.calculateMoves({
+        row,
+        column,
+        move: stats.move,
+        range: stats.range,
+        unitProps,
+        currentPlayer,
+      });
+    }
+  }
+
+  executeAttack({ fromRow, fromColumn, toRow, toColumn }) {
     const playerStats = UNITS[this.getUnitAt({ row: fromRow, column: fromColumn })].stats;
     const enemyStats = UNITS[this.getUnitAt({ row: toRow, column: toColumn })].stats;
     const playerTerrain = TERRAIN[this.getTerrainAt({ row: fromRow, column: fromColumn })];
@@ -131,7 +144,7 @@ class BattleMatrix {
   }
 
   markAttacking({ row, column }) {
-    this.matrix = this.matrix.set('grid', this.matrix.get('grid').setIn([row, column, 'moveDirection'], 'ATTACKING'));
+    this.matrix = this.matrix.set('grid', this.matrix.get('grid').setIn([row, column, 'moveDirection'], MOVE_PATH_VALUES.ATTACKING));
   }
 
   markActionable({ row, column }) {
@@ -145,7 +158,7 @@ class BattleMatrix {
   }
 
   getMoveDistance() {
-    return this.matrix.get('grid').reduce((memo, matrixRow) => memo += matrixRow.count(matrixColumn => matrixColumn.get('moveDirection')), 0);
+    return this.matrix.get('grid').reduce((memo, matrixRow) => memo + matrixRow.count(matrixColumn => matrixColumn.get('moveDirection')), 0);
   }
 
   getSelectedCell() {
@@ -161,103 +174,62 @@ class BattleMatrix {
     return selected;
   }
 
-  // TODO this needs serious refactoring...
-  // I can probably reuse some logic? not sure. for updating cells.
-  // This is terrible. Seriously. What am I doing with myself?
   updateMovePath({ row, column }) {
     const tail = this.getTail();
     const previousMoveDistance = this.getMoveDistance();
     const selectedUnitMaxMovement = UNITS[this.getSelectedCell().get('unit')].stats.move;
-    const isTailClick = tail.get('row') === row && tail.get('column') === column;
+    const tailColumn = tail.get('column');
+    const tailRow = tail.get('row');
+    const isTailClick = tailRow === row && tailColumn === column;
 
-    if (!isTailClick && previousMoveDistance >= selectedUnitMaxMovement) {
+    if (isTailClick) {
+      this.deselectAllCells();
+      this.moveUnit({ row, column });
+      return;
+    }
+
+    if (previousMoveDistance >= selectedUnitMaxMovement) {
       // TODO remove moveable from non-path cells. update attackable to reflect from movement
       return;
     }
 
-    const tailColumn = tail.get('column');
-    const tailRow = tail.get('row');
     const tailMoveDirection = tail.get('moveDirection');
-
+    const east = column - 1;
+    const north = row + 1;
     let previousDirectionUpdate;
-    if (row === tailRow && column - 1 === tailColumn) {
+    let moveDirection;
+    if (row === tailRow) {
+      moveDirection = east === tailColumn ? MOVE_PATH_VALUES.EAST_END : MOVE_PATH_VALUES.WEST_END;
       if (tailMoveDirection === MOVE_PATH_VALUES.NORTH_END) {
-        previousDirectionUpdate = MOVE_PATH_VALUES.SOUTH_EAST;
+        previousDirectionUpdate = east === tailColumn ? MOVE_PATH_VALUES.SOUTH_EAST : MOVE_PATH_VALUES.SOUTH_WEST;
       } else if (tailMoveDirection === MOVE_PATH_VALUES.SOUTH_END) {
-        previousDirectionUpdate = MOVE_PATH_VALUES.NORTH_EAST;
+        previousDirectionUpdate = east === tailColumn ? MOVE_PATH_VALUES.NORTH_EAST : MOVE_PATH_VALUES.NORTH_WEST;
       } else if (tailMoveDirection === MOVE_PATH_VALUES.EAST_END) {
-        previousDirectionUpdate = MOVE_PATH_VALUES.EAST_WEST;
-      } else if (tailMoveDirection === MOVE_PATH_VALUES.WEST_END) { // TODO traveling backwards?
-        console.log('you\'re traveling backwards. this is a weird case.');
-        previousDirectionUpdate = undefined;
-      } else {
-        console.log('this shouldn\'t be possible... EAST');
+        previousDirectionUpdate = east === tailColumn ? MOVE_PATH_VALUES.EAST_WEST : undefined;
+      } else if (tailMoveDirection === MOVE_PATH_VALUES.WEST_END) {
+        previousDirectionUpdate = east === tailColumn ? undefined : MOVE_PATH_VALUES.EAST_WEST;
       }
-      this.markMoveDirection({
-        row: tailRow,
-        column: tailColumn,
-        moveDirection: previousDirectionUpdate });
-      this.updateMoveDirection({ row, column, moveDirection: MOVE_PATH_VALUES.EAST_END });
-    } else if (row === tailRow && column + 1 === tailColumn) {
+    } else if (column === tailColumn) {
+      moveDirection = north === tailRow ? MOVE_PATH_VALUES.NORTH_END : MOVE_PATH_VALUES.SOUTH_END;
       if (tailMoveDirection === MOVE_PATH_VALUES.NORTH_END) {
-        previousDirectionUpdate = MOVE_PATH_VALUES.SOUTH_WEST;
+        previousDirectionUpdate = north === tailRow ? MOVE_PATH_VALUES.NORTH_SOUTH : undefined;
       } else if (tailMoveDirection === MOVE_PATH_VALUES.SOUTH_END) {
-        previousDirectionUpdate = MOVE_PATH_VALUES.NORTH_WEST;
-      } else if (tailMoveDirection === MOVE_PATH_VALUES.EAST_END) { // TODO traveling backwards?
-        console.log('you\'re traveling backwards. this is a weird case.');
-        previousDirectionUpdate = undefined;
-      } else if (tailMoveDirection === MOVE_PATH_VALUES.WEST_END) {
-        previousDirectionUpdate = MOVE_PATH_VALUES.EAST_WEST;
-      } else {
-        console.log('this shouldn\'t be possible... WEST');
-      }
-      this.markMoveDirection({
-        row: tailRow,
-        column: tailColumn,
-        moveDirection: previousDirectionUpdate });
-      this.updateMoveDirection({ row, column, moveDirection: MOVE_PATH_VALUES.WEST_END });
-    } else if (column === tailColumn && row + 1 === tailRow) {
-      if (tailMoveDirection === MOVE_PATH_VALUES.NORTH_END) {
-        previousDirectionUpdate = MOVE_PATH_VALUES.NORTH_SOUTH;
-      } else if (tailMoveDirection === MOVE_PATH_VALUES.SOUTH_END) { // TODO traveling backwards?
-        console.log('you\'re traveling backwards. this is a weird case.');
-        previousDirectionUpdate = undefined;
+        previousDirectionUpdate = north === tailRow ? undefined : MOVE_PATH_VALUES.NORTH_SOUTH;
       } else if (tailMoveDirection === MOVE_PATH_VALUES.EAST_END) {
-        previousDirectionUpdate = MOVE_PATH_VALUES.NORTH_WEST;
+        previousDirectionUpdate = north === tailRow ? MOVE_PATH_VALUES.NORTH_WEST : MOVE_PATH_VALUES.SOUTH_WEST;
       } else if (tailMoveDirection === MOVE_PATH_VALUES.WEST_END) {
-        previousDirectionUpdate = MOVE_PATH_VALUES.NORTH_EAST;
-      } else {
-        console.log('this shouldn\'t be possible... NORTH');
+        previousDirectionUpdate = north === tailRow ? MOVE_PATH_VALUES.NORTH_EAST : MOVE_PATH_VALUES.SOUTH_EAST;
       }
-      this.markMoveDirection({
-        row: tailRow,
-        column: tailColumn,
-        moveDirection: previousDirectionUpdate });
-      this.updateMoveDirection({ row, column, moveDirection: MOVE_PATH_VALUES.NORTH_END });
-    } else if (column === tailColumn && row - 1 === tailRow) {
-      if (tailMoveDirection === MOVE_PATH_VALUES.NORTH_END) { // TODO traveling backwards?
-        console.log('you\'re traveling backwards. this is a weird case.');
-        previousDirectionUpdate = undefined;
-      } else if (tailMoveDirection === MOVE_PATH_VALUES.SOUTH_END) {
-        previousDirectionUpdate = MOVE_PATH_VALUES.NORTH_SOUTH;
-      } else if (tailMoveDirection === MOVE_PATH_VALUES.EAST_END) {
-        previousDirectionUpdate = MOVE_PATH_VALUES.SOUTH_WEST;
-      } else if (tailMoveDirection === MOVE_PATH_VALUES.WEST_END) {
-        previousDirectionUpdate = MOVE_PATH_VALUES.SOUTH_EAST;
-      } else {
-        console.log('this shouldn\'t be possible... SOUTH');
-      }
-      this.markMoveDirection({
-        row: tailRow,
-        column: tailColumn,
-        moveDirection: previousDirectionUpdate });
-      this.updateMoveDirection({ row, column, moveDirection: MOVE_PATH_VALUES.SOUTH_END });
-    } else if (isTailClick) {
-      this.moveUnit({ row, column });
-      this.deselectAllCells();
     } else {
       this.deselectAllCells();
     }
+
+    this.markMoveDirection({
+      row: tailRow,
+      column: tailColumn,
+      moveDirection: previousDirectionUpdate,
+    });
+    this.updateMoveDirection({ row, column, moveDirection });
   }
 
   moveUnit({ row, column }) {

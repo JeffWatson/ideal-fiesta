@@ -171,18 +171,7 @@ exports[`frontend/app renders correctly 1`] = `
             <div
               className="grass-container"
             >
-              <div>
-                <div
-                  className="unit soldier blue"
-                >
-                  Soldier!
-                </div>
-                <div
-                  className="health-container"
-                >
-                  20
-                </div>
-              </div>
+              <div />
             </div>
           </td>
           <td
@@ -321,7 +310,18 @@ exports[`frontend/app renders correctly 1`] = `
             <div
               className="sand-container"
             >
-              <div />
+              <div>
+                <div
+                  className="unit soldier blue"
+                >
+                  Soldier!
+                </div>
+                <div
+                  className="health-container"
+                >
+                  20
+                </div>
+              </div>
             </div>
           </td>
           <td
