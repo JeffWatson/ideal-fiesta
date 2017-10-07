@@ -18,11 +18,20 @@ export const TERRAIN_TYPES = {
 };
 
 export const TERRAIN = {
-  GRASS: {},
-  SAND: {},
-  OCEAN: {},
-  MOUNTAIN: {},
+  GRASS: {
+    defenseBonus: 0,
+  },
+  SAND: {
+    defenseBonus: 1,
+  },
+  OCEAN: {
+    defenseBonus: 0,
+  },
+  MOUNTAIN: {
+    defenseBonus: 2,
+  },
   LAND_FACTORY: {
+    defenseBonus: 1,
     actionable: true,
     selectable: true,
   },
@@ -83,6 +92,8 @@ export const UNITS = {
     stats: {
       range: 1,
       move: 4,
+      attack: 0.8,
+      defense: 6,
     },
   },
   SOLDIER: {
@@ -93,6 +104,8 @@ export const UNITS = {
     stats: {
       range: 1,
       move: 3,
+      attack: 0.4,
+      defense: 4,
     },
   },
   CARRIER: {
@@ -123,6 +136,7 @@ export const MOVE_PATH_VALUES = {
   SOUTH_EAST: 'SOUTH_EAST',
   SOUTH_WEST: 'SOUTH_WEST',
   EAST_WEST: 'EAST_WEST',
+  ATTACKING: 'ATTACKING',
 };
 
 export const MOVE_PATH_TYPES = [
@@ -136,4 +150,5 @@ export const MOVE_PATH_TYPES = [
   MOVE_PATH_VALUES.SOUTH_EAST,
   MOVE_PATH_VALUES.SOUTH_WEST,
   MOVE_PATH_VALUES.EAST_WEST,
+  MOVE_PATH_VALUES.ATTACKING,
 ];

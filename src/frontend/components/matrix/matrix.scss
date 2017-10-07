@@ -27,10 +27,6 @@
         border: 3px solid $matrix-actionable-color;
       }
 
-      &.movePath {
-        content: "X"
-      }
-
       & > div {
         height: $matrixCellHeight;
         width: $matrixCellWidth;

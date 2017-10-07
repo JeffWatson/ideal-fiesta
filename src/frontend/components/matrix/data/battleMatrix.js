@@ -10,23 +10,23 @@ class BattleMatrix {
     this.matrix = matrix;
   }
 
-  // TODO get selected unit. check its movement range. clicking opponents unit triggers battle?
   onCellClick({ row, column, currentPlayer }) {
     const cell = this.getCell({ row, column });
     const selectedCell = this.getSelectedCell();
+    const disabled = cell.get('disabled');
 
-    if (!cell.get('movable')) {
+    if (!selectedCell && !cell.get('movable')) {
       this.deselectAllCells();
 
       const unit = this.getUnitAt({ row, column });
       const isCurrentPlayer = this.getCell({ row, column }).get('player') === currentPlayer;
 
       const terrainProps = TERRAIN[this.getTerrainAt({ row, column })];
-      if (terrainProps.selectable || (unit && isCurrentPlayer)) {
+      if (terrainProps.selectable || (unit && isCurrentPlayer && !disabled)) {
         this.selectCell({ row, column });
       }
 
-      if (unit && !cell.get('disabled')) {
+      if (unit && !disabled) {
         const unitProps = UNITS[unit];
         const stats = unitProps.stats;
         this.matrix = this.matrix.set('activeUnit', { row, column });
@@ -43,17 +43,52 @@ class BattleMatrix {
       if (terrainProps.actionable) {
         this.markActionable({ row, column });
       }
-    } else if (selectedCell && selectedCell.get('row') === row && selectedCell.get('column') === column) {
+    } else if (selectedCell && cell.get('attackable') && !cell.get('moveDirection') && cell.get('unit') && cell.get('player') !== currentPlayer) {
+      this.markAttacking({ row, column });
+    } else if (selectedCell && cell.get('attackable') && cell.get('moveDirection') === MOVE_PATH_VALUES.ATTACKING && cell.get('unit') && cell.get('player') !== currentPlayer) {
+      const tail = this.getTail();
+      const tailRow = tail.get('row');
+      const tailColumn = tail.get('column');
+      this.moveUnit({ row: tailRow, column: tailColumn });
       this.deselectAllCells();
-    } else {
+      this.attack({ fromRow: tailRow, fromColumn: tailColumn, toRow: row, toColumn: column });
+    } else if ((selectedCell && selectedCell.get('row') === row && selectedCell.get('column') === column) || !selectedCell) {
+      this.deselectAllCells();
+    } else if (selectedCell && !disabled) {
       this.updateMovePath({ row, column });
     }
 
     return this.matrix;
   }
 
+  attack({ fromRow, fromColumn, toRow, toColumn }) {
+    const playerStats = UNITS[this.getUnitAt({ row: fromRow, column: fromColumn })].stats;
+    const enemyStats = UNITS[this.getUnitAt({ row: toRow, column: toColumn })].stats;
+    const playerTerrain = TERRAIN[this.getTerrainAt({ row: fromRow, column: fromColumn })];
+    const enemyTerrain = TERRAIN[this.getTerrainAt({ row: toRow, column: toColumn })];
+    const playerHealth = this.getHealthAt({ row: fromRow, column: fromColumn });
+    const enemyHealth = this.getHealthAt({ row: toRow, column: toColumn });
+
+    const attackPower = (playerStats.attack * playerHealth) - (enemyStats.defense + enemyTerrain.defenseBonus);
+    const enemyNewHealth = enemyHealth - attackPower;
+
+    const rebuttlePower = (enemyStats.attack * enemyNewHealth) - (playerStats.defense + playerTerrain.defenseBonus);
+    const playerNewHealth = enemyNewHealth <= 0 ? playerHealth : playerHealth - (rebuttlePower > 0 ? rebuttlePower : 0);
+
+    this.updateHealthAt({ row: fromRow, column: fromColumn, health: playerNewHealth });
+    this.updateHealthAt({ row: toRow, column: toColumn, health: enemyNewHealth });
+  }
+
+  updateHealthAt({ row, column, health }) {
+    this.matrix = this.matrix.set('grid', this.matrix.get('grid').setIn([row, column, 'health'], health));
+  }
+
   getUnitAt({ row, column }) {
     return this.matrix.getIn(['grid', row, column, 'unit']);
+  }
+
+  getHealthAt({ row, column }) {
+    return this.matrix.getIn(['grid', row, column, 'health']);
   }
 
   getTerrainAt({ row, column }) {
@@ -70,6 +105,7 @@ class BattleMatrix {
         actionable: false,
         moveDirection: false,
         movementTail: false,
+        attacking: false,
       }))));
   }
 
@@ -92,6 +128,10 @@ class BattleMatrix {
 
   markMoveDirection({ row, column, moveDirection }) {
     this.matrix = this.matrix.set('grid', this.matrix.get('grid').setIn([row, column, 'moveDirection'], moveDirection));
+  }
+
+  markAttacking({ row, column }) {
+    this.matrix = this.matrix.set('grid', this.matrix.get('grid').setIn([row, column, 'moveDirection'], 'ATTACKING'));
   }
 
   markActionable({ row, column }) {

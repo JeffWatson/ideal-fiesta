@@ -1,5 +1,8 @@
 .movePath {
   height: 100px;
+  &.ATTACKING {
+    background: url('./images/attack.png');
+  }
   &.NORTH_END {
     background: url('./images/north.png');
   }
