@@ -1,7 +1,7 @@
 /* eslint react/prefer-stateless-function: 0 */
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
-import MatrixView from './../components/matrix';
+import MatrixView from 'components/matrix';
 import defaultStore from './defaultStore';
 
 import './App.scss';

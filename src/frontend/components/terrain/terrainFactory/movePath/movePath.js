@@ -1,7 +1,7 @@
 import React from 'react';
 import { oneOf } from 'prop-types';
 import classnames from 'classnames';
-import { MOVE_PATH_TYPES } from '../../../../../shared/sharedConstants';
+import { MOVE_PATH_TYPES } from 'shared/sharedConstants';
 
 import './movePath.scss';
 

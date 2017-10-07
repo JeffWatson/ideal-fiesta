@@ -1,10 +1,10 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import { shallow } from 'enzyme';
 import App from '../app';
 
 describe('frontend/app', () => {
   it('renders correctly', () => {
-    const app = renderer.create(<App />);
+    const app = shallow(<App />);
     expect(app).toMatchSnapshot();
   });
 });

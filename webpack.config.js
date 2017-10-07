@@ -33,4 +33,7 @@ module.exports = {
     path: __dirname,
     publicPath: 'public/',
   },
+  resolve: {
+    modules: [__dirname, 'src', 'src/frontend', 'node_modules'],
+  },
 };

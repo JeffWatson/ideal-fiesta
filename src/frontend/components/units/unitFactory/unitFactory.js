@@ -1,6 +1,6 @@
 import React from 'react';
 import { extend, toLower } from 'lodash';
-import { UNITS } from '../../../../shared/sharedConstants';
+import { UNITS } from 'shared/sharedConstants';
 
 import Soldier from './../soldier';
 import SmallTank from './../smallTank';

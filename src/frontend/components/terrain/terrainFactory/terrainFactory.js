@@ -1,5 +1,5 @@
 import React from 'react';
-import { TERRAIN, TERRAIN_TYPES as TYPES } from '../../../../shared/sharedConstants';
+import { TERRAIN, TERRAIN_TYPES as TYPES } from 'shared/sharedConstants';
 
 import Grass from './../grass';
 import Sand from './../sand';

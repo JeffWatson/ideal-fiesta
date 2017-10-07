@@ -3,7 +3,7 @@ import {
   UNITS,
   TERRAIN,
   MOVE_PATH_VALUES,
-} from '../../../../shared/sharedConstants';
+} from 'shared/sharedConstants';
 
 class BattleMatrix {
   constructor({ matrix }) {

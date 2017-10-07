@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { func } from 'prop-types';
+import { shape } from 'prop-types';
 import { connect } from 'react-redux';
 import { times } from 'lodash';
 import classNames from 'classnames';
-import UnitFactory from './../units/unitFactory';
-import TerrainFactory from './../terrain/terrainFactory';
+import UnitFactory from 'components/units/unitFactory';
+import TerrainFactory from 'components/terrain/terrainFactory';
 import mapStateToProps from './selector/mapStateToProps';
 import mapDispatchToProps from './actions/mapDispatchToProps';
 
@@ -21,7 +21,6 @@ class MatrixView extends Component {
   }
 
   renderCell({ column, row, cell, currentPlayer }) {
-    const { onCellClick } = this.props;
     const health = cell.get('health');
     const unit = cell.get('unit');
     const terrain = cell.get('terrain');
@@ -40,15 +39,8 @@ class MatrixView extends Component {
     return (<td
       className={className}
       key={key}
-      onClick={() => onCellClick({ terrain,
-        column,
-        row,
-        unit,
-        matrix: this.props.matrix,
-        currentPlayer,
-      })}
     >
-      {TerrainFactory.createTerrain({ terrain, children, row, column, health, moveDirection })}
+      {TerrainFactory.createTerrain({ terrain, children, row, column, health, moveDirection, currentPlayer })}
     </td>);
   }
 
@@ -69,7 +61,7 @@ class MatrixView extends Component {
 
 // TODO proper propTypes of matrix would be nice. Once I have them ironed out...
 MatrixView.propTypes = {
-  onCellClick: func.isRequired,
+  matrix: shape({}).isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MatrixView);
