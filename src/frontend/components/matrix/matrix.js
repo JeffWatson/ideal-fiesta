@@ -32,7 +32,8 @@ class MatrixView extends Component {
     const player = cell.get('player');
     const moveDirection = cell.get('moveDirection');
     const disabled = cell.get('disabled');
-    const className = classNames('matrix-cell', { attackable, movable, actionable, selected });
+    const combinable = cell.get('combinable');
+    const className = classNames('matrix-cell', { attackable, movable, actionable, selected, combinable });
 
     const key = `matrix-cell-${column}-${row}-${terrain}`;
     const children = UnitFactory.createUnit({ player, factoryType: 'LAND', unit, disabled });
@@ -66,7 +67,7 @@ class MatrixView extends Component {
   }
 }
 
-// TODO proper propTypes of matrix would be nice.
+// TODO proper propTypes of matrix would be nice. Once I have them ironed out...
 MatrixView.propTypes = {
   onCellClick: func.isRequired,
 };

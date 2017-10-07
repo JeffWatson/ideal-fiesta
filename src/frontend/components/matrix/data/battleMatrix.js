@@ -119,6 +119,7 @@ class BattleMatrix {
         moveDirection: false,
         movementTail: false,
         attacking: false,
+        combinable: false,
       }))));
   }
 
@@ -189,7 +190,6 @@ class BattleMatrix {
     }
 
     if (previousMoveDistance >= selectedUnitMaxMovement) {
-      // TODO remove moveable from non-path cells. update attackable to reflect from movement
       return;
     }
 
@@ -312,13 +312,13 @@ class BattleMatrix {
     }
   }
 
-  // TODO unit combination. take into account health.
-  // TODO combine like units with sum of health < MAX_HEALTH
+  // TODO units going in PERSONNEL_CARRIER?
   // TODO terrain modifiers, mountains should be harder to climb, sand too, etc...
   calculateMove({ row, column, move, range, unitProps, currentPlayer }) {
     const cell = this.getCell({ row, column });
     const occupantUnit = cell.get('unit');
     const isCurrentPlayer = cell.get('player') === currentPlayer;
+    const selectedCell = this.getSelectedCell();
 
     const attackable = range > 0 && occupantUnit ?
       unitProps.attacks.includes(UNITS[occupantUnit].type) : true;
@@ -332,9 +332,18 @@ class BattleMatrix {
     const selected = cell.get('selected');
     const terrainInaccessible = unitProps.inaccessibleTerrain.includes(terrain);
     const movable = (!occupied || selected) && move > 0 && !terrainInaccessible;
+    const terrainProps = TERRAIN[terrain];
 
     if (movable) {
       this.matrix = this.matrix.set('grid', this.matrix.get('grid').mergeIn([row, column, 'movable'], movable));
+    }
+
+    if (isCurrentPlayer && unitProps.name === occupantUnit && (selectedCell.get('row') !== row || selectedCell.get('column') !== column)) {
+      this.matrix = this.matrix.set('grid', this.matrix.get('grid').mergeIn([row, column, 'combinable'], true));
+    }
+
+    if (!isCurrentPlayer && terrainProps.actionable) {
+      this.matrix = this.matrix.set('grid', this.matrix.get('grid').mergeIn([row, column, 'actionable'], true));
     }
   }
 

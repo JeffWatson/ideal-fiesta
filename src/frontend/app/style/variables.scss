@@ -5,6 +5,7 @@ $yellow: yellow;
 $red: red;
 $blue: blue;
 $green: green;
+$dark-red: darken(red, 10%);
 $black: black;
 $white: white;
 
@@ -23,5 +24,6 @@ $matrix-selected-color: $black;
 $matrix-movable-color: $blue;
 $matrix-attackable-color: $red;
 $matrix-actionable-color: $green;
+$matrix-combinable-color: $dark-red;
 
 $disabled: #999999;
