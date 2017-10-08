@@ -8,6 +8,8 @@ $green: green;
 $dark-red: darken(red, 10%);
 $black: black;
 $white: white;
+$brown: brown;
+$grey: grey;
 
 // Terrain
 $grass: #00ff66;
@@ -25,5 +27,8 @@ $matrix-movable-color: $blue;
 $matrix-attackable-color: $red;
 $matrix-actionable-color: $green;
 $matrix-combinable-color: $dark-red;
+
+
+$current-player-background: darken($grey, 10%);
 
 $disabled: #999999;

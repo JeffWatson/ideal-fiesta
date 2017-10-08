@@ -2,6 +2,8 @@
 
 .matrix {
   .matrix-table {
+    clear: both;
+
     .matrix-cell {
       height: $matrixCellHeight;
       width: $matrixCellWidth;

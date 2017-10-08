@@ -22,14 +22,14 @@ class CurrentPlayerHeader extends Component {
         <div className="avatar" >
           <img alt={`${username} Avatar`} src={currentPlayer.get('avatarUrl')} />
         </div>
-        <div className="username" >username</div>
+        <div className="username" >{username}</div>
       </div>
       <div className="status" >
         <div className="money">{money}</div>
         <div className="special-points">{specialPoints}</div>
-      </div>
-      <div className="end-turn-button">
-        <Button onClick={endTurn} className="end-turn-button" disabled={false} />
+        <div className="end-turn-button">
+          <Button onClick={endTurn} className="end-turn-button" disabled={false} text="End Turn" />
+        </div>
       </div>
     </div>);
   }

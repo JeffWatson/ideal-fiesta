@@ -5,6 +5,7 @@ import { times } from 'lodash';
 import classNames from 'classnames';
 import UnitFactory from 'components/units/unitFactory';
 import TerrainFactory from 'components/terrain/terrainFactory';
+import CurrentPlayerHeader from 'components/currentPlayerHeader';
 import mapStateToProps from './selector/mapStateToProps';
 import mapDispatchToProps from './actions/mapDispatchToProps';
 
@@ -49,7 +50,9 @@ class MatrixView extends Component {
     const currentPlayer = matrix.get('currentPlayer');
 
     return (<div className="matrix">
-      <div className="current-player-info">The current Player is: { currentPlayer }</div>
+      <div className="current-player-info">
+        <CurrentPlayerHeader currentPlayer={currentPlayer} />
+      </div>
       <table className="matrix-table">
         <tbody>
           {this.generateMatrix({ matrix, currentPlayer })}

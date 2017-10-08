@@ -1,9 +1,7 @@
-// TODO, hmm are there any action here? maybe end turn? (if it's premature.)
-// import onCellClick from './onCellClick';
-
+import endTurn from './endTurn';
 
 export default function mapDispatchToProps(dispatch) {
   return {
-    // onCellClick: args => onCellClick(args, dispatch),
+    endTurn: args => dispatch(endTurn(args)),
   };
 }

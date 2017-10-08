@@ -79,7 +79,11 @@
     "coverageReporters": [
       "html"
     ],
-    "moduleDirectories": ["node_modules", "src", "src/frontend"],
+    "moduleDirectories": [
+      "node_modules",
+      "src",
+      "src/frontend"
+    ],
     "setupFiles": [
       "./src/frontend/app/__test__/__mocks__/testSetup.js"
     ]
