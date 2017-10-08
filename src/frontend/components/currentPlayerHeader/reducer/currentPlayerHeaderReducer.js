@@ -1,5 +1,4 @@
 import initialState from './initialState';
-// TODO move actions to constant file.
 
 export default function matrixViewReducer(state, action) {
   switch (action.type) {
