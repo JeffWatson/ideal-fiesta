@@ -9,7 +9,7 @@ import mapDispatchToProps from './actions/mapDispatchToProps';
 
 import './currentPlayerHeader.scss';
 
-class CurrentPlayerHeader extends Component {
+export class CurrentPlayerHeader extends Component {
   render() {
     const { currentPlayer, endTurn } = this.props;
     const username = currentPlayer.get('username');

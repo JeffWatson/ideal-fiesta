@@ -1,4 +1,4 @@
-// TODO remove from here. Shouldn't exist.
+// TODO remove from here. Shouldn't exist. Move to tests only location
 import { fromJS } from 'immutable';
 
 export default fromJS({
