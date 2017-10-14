@@ -11,7 +11,7 @@ import mapDispatchToProps from './actions/mapDispatchToProps';
 
 import './matrix.scss';
 
-class MatrixView extends Component {
+export class MatrixView extends Component {
   generateMatrix({ matrix, currentPlayer }) {
     return (times(matrix.get('rows'), row => (<tr className="matrix-row" key={`matrix-row-${row}`}>
       {times(matrix.get('columns'), (column) => {
@@ -22,26 +22,25 @@ class MatrixView extends Component {
   }
 
   renderCell({ column, row, cell, currentPlayer }) {
-    const health = cell.get('health');
     const unit = cell.get('unit');
     const terrain = cell.get('terrain');
     const selected = cell.get('selected');
     const attackable = cell.get('attackable');
     const movable = cell.get('movable');
     const actionable = cell.get('actionable');
-    const player = cell.get('player');
     const moveDirection = cell.get('moveDirection');
     const disabled = cell.get('disabled');
     const combinable = cell.get('combinable');
+    const building = cell.get('building');
     const className = classNames('matrix-cell', { attackable, movable, actionable, selected, combinable });
 
     const key = `matrix-cell-${column}-${row}-${terrain}`;
-    const children = UnitFactory.createUnit({ player, factoryType: 'LAND', unit, disabled });
+    const children = unit && UnitFactory.createUnit({ factoryType: 'LAND', unit, disabled });
     return (<td
       className={className}
       key={key}
     >
-      {TerrainFactory.createTerrain({ terrain, children, row, column, health, moveDirection, currentPlayer })}
+      {TerrainFactory.createTerrain({ terrain, unit: children, row, column, moveDirection, currentPlayer, building })}
     </td>);
   }
 

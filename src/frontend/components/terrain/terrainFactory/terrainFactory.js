@@ -7,17 +7,17 @@ import Ocean from './../ocean';
 import Mountain from './../mountain';
 import LandFactory from './../landFactory';
 
-import Health from './health';
+import Health from './../../health';
 import MovePath from './movePath';
 
 export default class UnitFactory {
-  static createTerrain({ terrain, children, player, row, column, health, moveDirection }) {
-    const terrainProps = { terrain: TERRAIN[terrain], player, row, column };
+  static createTerrain({ terrain, unit, moveDirection, building }) {
+    const terrainProps = { terrain: TERRAIN[terrain], player: building && building.get('player') };
 
-    const healthMarker = health ? (<Health health={health} />) : null;
+    const healthMarker = building ? (<Health health={building.get('health')} className={'building'} />) : null;
     const pathMarker = moveDirection ? (<MovePath direction={moveDirection} />) : null;
 
-    const contents = (<div>{ children }{ pathMarker }{ healthMarker }</div>);
+    const contents = (<div>{ unit }{ pathMarker }{ healthMarker }</div>);
 
     switch (TYPES[terrain]) {
     case TYPES.GRASS: return (<Grass {...terrainProps} >{ contents }</Grass>);
