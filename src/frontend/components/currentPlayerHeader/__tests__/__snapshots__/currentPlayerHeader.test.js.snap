@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`frontend/components/CurrentPlayerHeader component renders correctly 1`] = `
+<div
+  className="current-player-header"
+>
+  <div
+    className="user"
+  >
+    <div
+      className="avatar"
+    >
+      <img
+        alt="bananaMan Avatar"
+        src="./favicon.ico"
+      />
+    </div>
+    <div
+      className="username"
+    >
+      bananaMan
+    </div>
+  </div>
+  <div
+    className="status"
+  >
+    <div
+      className="money"
+    >
+      1000
+    </div>
+    <div
+      className="special-points"
+    >
+      90
+    </div>
+    <div
+      className="end-turn-button"
+    >
+      <Button
+        className="end-turn-button"
+        disabled={false}
+        onClick={[Function]}
+        text="End Turn"
+      />
+    </div>
+  </div>
+</div>
+`;
