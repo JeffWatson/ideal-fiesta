@@ -1,0 +1,23 @@
+@import "../../app/style/variables";
+
+.health-container {
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  border-radius: 10px;
+  border: $white solid 1px;
+  color: $white;
+  font-weight: bold;
+
+  &.building {
+    bottom: 2px;
+    left: 2px;
+    background-color: $grey;
+  }
+
+  &.unit {
+    bottom: 2px;
+    right: 2px;
+    background-color: $red;
+  }
+}

@@ -1,0 +1,612 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`frontend/components/matrix component renders correctly 1`] = `
+<div
+  className="matrix"
+>
+  <div
+    className="current-player-info"
+  >
+    <Connect(CurrentPlayerHeader)
+      currentPlayer="BLUE"
+    />
+  </div>
+  <table
+    className="matrix-table"
+  >
+    <tbody>
+      <tr
+        className="matrix-row"
+        key="matrix-row-0"
+      >
+        <td
+          className="matrix-cell"
+          key="matrix-cell-0-0-SAND"
+        >
+          <Sand
+            terrain={
+              Object {
+                "defenseBonus": 1,
+              }
+            }
+          >
+            <div>
+              <div>
+                <Soldier
+                  attacks={
+                    Array [
+                      "AIR",
+                      "LAND",
+                      "SEA",
+                    ]
+                  }
+                  disabled={false}
+                  inaccessibleTerrain={
+                    Array [
+                      "OCEAN",
+                    ]
+                  }
+                  name="SOLDIER"
+                  player="green"
+                  stats={
+                    Object {
+                      "attack": 0.4,
+                      "defense": 4,
+                      "move": 3,
+                      "range": 1,
+                    }
+                  }
+                  type="LAND"
+                />
+                <Health
+                  className="unit"
+                  health={20}
+                />
+              </div>
+            </div>
+          </Sand>
+        </td>
+        <td
+          className="matrix-cell"
+          key="matrix-cell-1-0-SAND"
+        >
+          <Sand
+            terrain={
+              Object {
+                "defenseBonus": 1,
+              }
+            }
+          >
+            <div />
+          </Sand>
+        </td>
+        <td
+          className="matrix-cell"
+          key="matrix-cell-2-0-SAND"
+        >
+          <Sand
+            terrain={
+              Object {
+                "defenseBonus": 1,
+              }
+            }
+          >
+            <div />
+          </Sand>
+        </td>
+        <td
+          className="matrix-cell"
+          key="matrix-cell-3-0-SAND"
+        >
+          <Sand
+            terrain={
+              Object {
+                "defenseBonus": 1,
+              }
+            }
+          >
+            <div>
+              <div>
+                <SmallTank
+                  attacks={
+                    Array [
+                      "AIR",
+                      "LAND",
+                      "SEA",
+                    ]
+                  }
+                  disabled={false}
+                  inaccessibleTerrain={
+                    Array [
+                      "OCEAN",
+                      "MOUNTAIN",
+                    ]
+                  }
+                  name="SMALL_TANK"
+                  player="red"
+                  stats={
+                    Object {
+                      "attack": 0.8,
+                      "defense": 6,
+                      "move": 4,
+                      "range": 1,
+                    }
+                  }
+                  type="LAND"
+                />
+                <Health
+                  className="unit"
+                  health={20}
+                />
+              </div>
+            </div>
+          </Sand>
+        </td>
+        <td
+          className="matrix-cell"
+          key="matrix-cell-4-0-SAND"
+        >
+          <Sand
+            terrain={
+              Object {
+                "defenseBonus": 1,
+              }
+            }
+          >
+            <div />
+          </Sand>
+        </td>
+      </tr>
+      <tr
+        className="matrix-row"
+        key="matrix-row-1"
+      >
+        <td
+          className="matrix-cell"
+          key="matrix-cell-0-1-OCEAN"
+        >
+          <Ocean
+            terrain={
+              Object {
+                "defenseBonus": 0,
+              }
+            }
+          >
+            <div />
+          </Ocean>
+        </td>
+        <td
+          className="matrix-cell"
+          key="matrix-cell-1-1-OCEAN"
+        >
+          <Ocean
+            terrain={
+              Object {
+                "defenseBonus": 0,
+              }
+            }
+          >
+            <div />
+          </Ocean>
+        </td>
+        <td
+          className="matrix-cell"
+          key="matrix-cell-2-1-OCEAN"
+        >
+          <Ocean
+            terrain={
+              Object {
+                "defenseBonus": 0,
+              }
+            }
+          >
+            <div />
+          </Ocean>
+        </td>
+        <td
+          className="matrix-cell"
+          key="matrix-cell-3-1-OCEAN"
+        >
+          <Ocean
+            terrain={
+              Object {
+                "defenseBonus": 0,
+              }
+            }
+          >
+            <div />
+          </Ocean>
+        </td>
+        <td
+          className="matrix-cell"
+          key="matrix-cell-4-1-LAND_FACTORY"
+        >
+          <Connect(LandFactory)
+            player="RED"
+            terrain={
+              Object {
+                "actionable": true,
+                "defenseBonus": 1,
+                "selectable": true,
+              }
+            }
+          >
+            <div>
+              <Health
+                className="building"
+                health={20}
+              />
+            </div>
+          </Connect(LandFactory)>
+        </td>
+      </tr>
+      <tr
+        className="matrix-row"
+        key="matrix-row-2"
+      >
+        <td
+          className="matrix-cell"
+          key="matrix-cell-0-2-GRASS"
+        >
+          <Grass
+            terrain={
+              Object {
+                "defenseBonus": 0,
+              }
+            }
+          >
+            <div />
+          </Grass>
+        </td>
+        <td
+          className="matrix-cell"
+          key="matrix-cell-1-2-SAND"
+        >
+          <Sand
+            terrain={
+              Object {
+                "defenseBonus": 1,
+              }
+            }
+          >
+            <div />
+          </Sand>
+        </td>
+        <td
+          className="matrix-cell"
+          key="matrix-cell-2-2-MOUNTAIN"
+        >
+          <Mountain
+            terrain={
+              Object {
+                "defenseBonus": 2,
+              }
+            }
+          >
+            <div />
+          </Mountain>
+        </td>
+        <td
+          className="matrix-cell"
+          key="matrix-cell-3-2-GRASS"
+        >
+          <Grass
+            terrain={
+              Object {
+                "defenseBonus": 0,
+              }
+            }
+          >
+            <div>
+              <div>
+                <Soldier
+                  attacks={
+                    Array [
+                      "AIR",
+                      "LAND",
+                      "SEA",
+                    ]
+                  }
+                  disabled={false}
+                  inaccessibleTerrain={
+                    Array [
+                      "OCEAN",
+                    ]
+                  }
+                  name="SOLDIER"
+                  player="blue"
+                  stats={
+                    Object {
+                      "attack": 0.4,
+                      "defense": 4,
+                      "move": 3,
+                      "range": 1,
+                    }
+                  }
+                  type="LAND"
+                />
+                <Health
+                  className="unit"
+                  health={20}
+                />
+              </div>
+            </div>
+          </Grass>
+        </td>
+        <td
+          className="matrix-cell"
+          key="matrix-cell-4-2-SAND"
+        >
+          <Sand
+            terrain={
+              Object {
+                "defenseBonus": 1,
+              }
+            }
+          >
+            <div />
+          </Sand>
+        </td>
+      </tr>
+      <tr
+        className="matrix-row"
+        key="matrix-row-3"
+      >
+        <td
+          className="matrix-cell"
+          key="matrix-cell-0-3-LAND_FACTORY"
+        >
+          <Connect(LandFactory)
+            player="BLUE"
+            terrain={
+              Object {
+                "actionable": true,
+                "defenseBonus": 1,
+                "selectable": true,
+              }
+            }
+          >
+            <div>
+              <Health
+                className="building"
+                health={20}
+              />
+            </div>
+          </Connect(LandFactory)>
+        </td>
+        <td
+          className="matrix-cell"
+          key="matrix-cell-1-3-SAND"
+        >
+          <Sand
+            terrain={
+              Object {
+                "defenseBonus": 1,
+              }
+            }
+          >
+            <div />
+          </Sand>
+        </td>
+        <td
+          className="matrix-cell"
+          key="matrix-cell-2-3-SAND"
+        >
+          <Sand
+            terrain={
+              Object {
+                "defenseBonus": 1,
+              }
+            }
+          >
+            <div />
+          </Sand>
+        </td>
+        <td
+          className="matrix-cell"
+          key="matrix-cell-3-3-GRASS"
+        >
+          <Grass
+            terrain={
+              Object {
+                "defenseBonus": 0,
+              }
+            }
+          >
+            <div>
+              <div>
+                <Soldier
+                  attacks={
+                    Array [
+                      "AIR",
+                      "LAND",
+                      "SEA",
+                    ]
+                  }
+                  disabled={false}
+                  inaccessibleTerrain={
+                    Array [
+                      "OCEAN",
+                    ]
+                  }
+                  name="SOLDIER"
+                  player="blue"
+                  stats={
+                    Object {
+                      "attack": 0.4,
+                      "defense": 4,
+                      "move": 3,
+                      "range": 1,
+                    }
+                  }
+                  type="LAND"
+                />
+                <Health
+                  className="unit"
+                  health={20}
+                />
+              </div>
+            </div>
+          </Grass>
+        </td>
+        <td
+          className="matrix-cell"
+          key="matrix-cell-4-3-SAND"
+        >
+          <Sand
+            terrain={
+              Object {
+                "defenseBonus": 1,
+              }
+            }
+          >
+            <div />
+          </Sand>
+        </td>
+      </tr>
+      <tr
+        className="matrix-row"
+        key="matrix-row-4"
+      >
+        <td
+          className="matrix-cell"
+          key="matrix-cell-0-4-SAND"
+        >
+          <Sand
+            terrain={
+              Object {
+                "defenseBonus": 1,
+              }
+            }
+          >
+            <div />
+          </Sand>
+        </td>
+        <td
+          className="matrix-cell"
+          key="matrix-cell-1-4-GRASS"
+        >
+          <Grass
+            terrain={
+              Object {
+                "defenseBonus": 0,
+              }
+            }
+          >
+            <div />
+          </Grass>
+        </td>
+        <td
+          className="matrix-cell"
+          key="matrix-cell-2-4-SAND"
+        >
+          <Sand
+            terrain={
+              Object {
+                "defenseBonus": 1,
+              }
+            }
+          >
+            <div>
+              <div>
+                <SmallTank
+                  attacks={
+                    Array [
+                      "AIR",
+                      "LAND",
+                      "SEA",
+                    ]
+                  }
+                  disabled={false}
+                  inaccessibleTerrain={
+                    Array [
+                      "OCEAN",
+                      "MOUNTAIN",
+                    ]
+                  }
+                  name="SMALL_TANK"
+                  player="blue"
+                  stats={
+                    Object {
+                      "attack": 0.8,
+                      "defense": 6,
+                      "move": 4,
+                      "range": 1,
+                    }
+                  }
+                  type="LAND"
+                />
+                <Health
+                  className="unit"
+                  health={20}
+                />
+              </div>
+            </div>
+          </Sand>
+        </td>
+        <td
+          className="matrix-cell"
+          key="matrix-cell-3-4-SAND"
+        >
+          <Sand
+            terrain={
+              Object {
+                "defenseBonus": 1,
+              }
+            }
+          >
+            <div />
+          </Sand>
+        </td>
+        <td
+          className="matrix-cell"
+          key="matrix-cell-4-4-SAND"
+        >
+          <Sand
+            terrain={
+              Object {
+                "defenseBonus": 1,
+              }
+            }
+          >
+            <div>
+              <div>
+                <Soldier
+                  attacks={
+                    Array [
+                      "AIR",
+                      "LAND",
+                      "SEA",
+                    ]
+                  }
+                  disabled={false}
+                  inaccessibleTerrain={
+                    Array [
+                      "OCEAN",
+                    ]
+                  }
+                  name="SOLDIER"
+                  player="yellow"
+                  stats={
+                    Object {
+                      "attack": 0.4,
+                      "defense": 4,
+                      "move": 3,
+                      "range": 1,
+                    }
+                  }
+                  type="LAND"
+                />
+                <Health
+                  className="unit"
+                  health={20}
+                />
+              </div>
+            </div>
+          </Sand>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+`;
