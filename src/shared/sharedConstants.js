@@ -37,7 +37,7 @@ export const TERRAIN = {
   },
 };
 
-const UNIT_TYPES = {
+export const UNIT_TYPES = {
   AIR: 'AIR',
   LAND: 'LAND',
   SEA: 'SEA',

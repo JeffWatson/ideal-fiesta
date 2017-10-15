@@ -21,7 +21,7 @@ Dialog.propTypes = {
 };
 
 Dialog.defaultProps = {
-  className: undefined,
+  className: 'default',
 };
 
 export default Dialog;

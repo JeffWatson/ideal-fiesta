@@ -9,7 +9,7 @@ const FactoryPurchaseDialog = ({ type, onUnitClick, onDialogClose }) => (<Dialog
   <div className="land-factory-purchase-dialog">
     {map(UNITS_BY_TYPE[type], (unit) => {
       const unitProps = UNITS[unit.name];
-      return (<div className="purchase-unit" >
+      return (<div className="purchase-unit" key={`purchase-unit-${unit.name}`}>
         <Button onClick={() => onUnitClick(unit)}>
         Purchase dialog {unitProps.name}
         </Button>
