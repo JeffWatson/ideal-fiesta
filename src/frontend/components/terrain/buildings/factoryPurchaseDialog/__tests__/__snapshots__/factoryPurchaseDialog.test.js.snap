@@ -16,7 +16,6 @@ exports[`frontend/components/terrain/buildings/FactoryPurchaseDialog component r
         disabled={false}
         onClick={[Function]}
       >
-        Purchase dialog 
         BOMBER
       </Button>
     </div>
@@ -28,7 +27,6 @@ exports[`frontend/components/terrain/buildings/FactoryPurchaseDialog component r
         disabled={false}
         onClick={[Function]}
       >
-        Purchase dialog 
         JET
       </Button>
     </div>
@@ -40,7 +38,6 @@ exports[`frontend/components/terrain/buildings/FactoryPurchaseDialog component r
         disabled={false}
         onClick={[Function]}
       >
-        Purchase dialog 
         HELICOPTER
       </Button>
     </div>
@@ -64,7 +61,6 @@ exports[`frontend/components/terrain/buildings/FactoryPurchaseDialog component r
         disabled={false}
         onClick={[Function]}
       >
-        Purchase dialog 
         SOLDIER
       </Button>
     </div>
@@ -76,7 +72,6 @@ exports[`frontend/components/terrain/buildings/FactoryPurchaseDialog component r
         disabled={false}
         onClick={[Function]}
       >
-        Purchase dialog 
         SMALL_TANK
       </Button>
     </div>
@@ -88,7 +83,6 @@ exports[`frontend/components/terrain/buildings/FactoryPurchaseDialog component r
         disabled={false}
         onClick={[Function]}
       >
-        Purchase dialog 
         PERSONNEL_CARRIER
       </Button>
     </div>
@@ -100,7 +94,6 @@ exports[`frontend/components/terrain/buildings/FactoryPurchaseDialog component r
         disabled={false}
         onClick={[Function]}
       >
-        Purchase dialog 
         MEDIUM_TANK
       </Button>
     </div>
@@ -112,7 +105,6 @@ exports[`frontend/components/terrain/buildings/FactoryPurchaseDialog component r
         disabled={false}
         onClick={[Function]}
       >
-        Purchase dialog 
         ARTILLERY
       </Button>
     </div>
@@ -124,7 +116,6 @@ exports[`frontend/components/terrain/buildings/FactoryPurchaseDialog component r
         disabled={false}
         onClick={[Function]}
       >
-        Purchase dialog 
         ANTI_AIR
       </Button>
     </div>
@@ -148,7 +139,6 @@ exports[`frontend/components/terrain/buildings/FactoryPurchaseDialog component r
         disabled={false}
         onClick={[Function]}
       >
-        Purchase dialog 
         CARRIER
       </Button>
     </div>
@@ -160,7 +150,6 @@ exports[`frontend/components/terrain/buildings/FactoryPurchaseDialog component r
         disabled={false}
         onClick={[Function]}
       >
-        Purchase dialog 
         DESTROYER
       </Button>
     </div>
@@ -172,7 +161,6 @@ exports[`frontend/components/terrain/buildings/FactoryPurchaseDialog component r
         disabled={false}
         onClick={[Function]}
       >
-        Purchase dialog 
         SUBMARINE
       </Button>
     </div>

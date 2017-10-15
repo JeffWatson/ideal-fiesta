@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`frontend/components/terrain/grass component renders correctly 1`] = `
+<div
+  className="grass-container"
+>
+  <div>
+    Children
+  </div>
+</div>
+`;
