@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`frontend/components/dialog component renders correctly 1`] = `
+<div
+  className="dialog class"
+>
+  <Button
+    className="close"
+    disabled={false}
+    onClick={[Function]}
+    text="close"
+  />
+  <div>
+    Children
+  </div>
+</div>
+`;

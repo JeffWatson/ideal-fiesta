@@ -1,5 +1,10 @@
+$matrixCellHeight: 100px;
+$matrixCellWidth: 100px;
+
 @mixin health-container () {
   position: relative;
+  height: $matrixCellHeight;
+  width: $matrixCellWidth;
 }
 
 @mixin matrix-container($color) {

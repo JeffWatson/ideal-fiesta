@@ -2,6 +2,8 @@ import React from 'react';
 import { bool, func, node, string } from 'prop-types';
 import classnames from 'classnames';
 
+import './button.scss';
+
 const Button = ({ className, onClick, text, children, disabled }) => {
   const buttonClassName = classnames('button', className);
   return (<button
@@ -24,7 +26,6 @@ Button.propTypes = {
 
 Button.defaultProps = {
   className: undefined,
-  onClick: undefined,
   text: undefined,
   children: undefined,
   disabled: false,

@@ -37,7 +37,7 @@ export const TERRAIN = {
   },
 };
 
-const UNIT_TYPES = {
+export const UNIT_TYPES = {
   AIR: 'AIR',
   LAND: 'LAND',
   SEA: 'SEA',
@@ -123,6 +123,12 @@ export const UNITS = {
     attacks: [UNIT_TYPES.SEA],
     name: 'SUBMARINE',
   },
+};
+
+export const UNITS_BY_TYPE = {
+  AIR: [UNITS.BOMBER, UNITS.JET, UNITS.HELICOPTER],
+  LAND: [UNITS.SOLDIER, UNITS.SMALL_TANK, UNITS.PERSONNEL_CARRIER, UNITS.MEDIUM_TANK, UNITS.ARTILLERY, UNITS.ANTI_AIR],
+  SEA: [UNITS.CARRIER, UNITS.DESTROYER, UNITS.SUBMARINE],
 };
 
 export const MOVE_PATH_VALUES = {

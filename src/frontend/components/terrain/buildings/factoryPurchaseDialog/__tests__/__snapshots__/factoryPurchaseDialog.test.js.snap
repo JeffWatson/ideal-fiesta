@@ -1,0 +1,181 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`frontend/components/terrain/buildings/FactoryPurchaseDialog component renders correctly; AIR 1`] = `
+<Dialog
+  className="default"
+  onClose={[Function]}
+>
+  <div
+    className="land-factory-purchase-dialog"
+  >
+    <div
+      className="purchase-unit"
+      key="purchase-unit-BOMBER"
+    >
+      <Button
+        disabled={false}
+        onClick={[Function]}
+      >
+        Purchase dialog 
+        BOMBER
+      </Button>
+    </div>
+    <div
+      className="purchase-unit"
+      key="purchase-unit-JET"
+    >
+      <Button
+        disabled={false}
+        onClick={[Function]}
+      >
+        Purchase dialog 
+        JET
+      </Button>
+    </div>
+    <div
+      className="purchase-unit"
+      key="purchase-unit-HELICOPTER"
+    >
+      <Button
+        disabled={false}
+        onClick={[Function]}
+      >
+        Purchase dialog 
+        HELICOPTER
+      </Button>
+    </div>
+  </div>
+</Dialog>
+`;
+
+exports[`frontend/components/terrain/buildings/FactoryPurchaseDialog component renders correctly; LAND 1`] = `
+<Dialog
+  className="default"
+  onClose={[Function]}
+>
+  <div
+    className="land-factory-purchase-dialog"
+  >
+    <div
+      className="purchase-unit"
+      key="purchase-unit-SOLDIER"
+    >
+      <Button
+        disabled={false}
+        onClick={[Function]}
+      >
+        Purchase dialog 
+        SOLDIER
+      </Button>
+    </div>
+    <div
+      className="purchase-unit"
+      key="purchase-unit-SMALL_TANK"
+    >
+      <Button
+        disabled={false}
+        onClick={[Function]}
+      >
+        Purchase dialog 
+        SMALL_TANK
+      </Button>
+    </div>
+    <div
+      className="purchase-unit"
+      key="purchase-unit-PERSONNEL_CARRIER"
+    >
+      <Button
+        disabled={false}
+        onClick={[Function]}
+      >
+        Purchase dialog 
+        PERSONNEL_CARRIER
+      </Button>
+    </div>
+    <div
+      className="purchase-unit"
+      key="purchase-unit-MEDIUM_TANK"
+    >
+      <Button
+        disabled={false}
+        onClick={[Function]}
+      >
+        Purchase dialog 
+        MEDIUM_TANK
+      </Button>
+    </div>
+    <div
+      className="purchase-unit"
+      key="purchase-unit-ARTILLERY"
+    >
+      <Button
+        disabled={false}
+        onClick={[Function]}
+      >
+        Purchase dialog 
+        ARTILLERY
+      </Button>
+    </div>
+    <div
+      className="purchase-unit"
+      key="purchase-unit-ANTI_AIR"
+    >
+      <Button
+        disabled={false}
+        onClick={[Function]}
+      >
+        Purchase dialog 
+        ANTI_AIR
+      </Button>
+    </div>
+  </div>
+</Dialog>
+`;
+
+exports[`frontend/components/terrain/buildings/FactoryPurchaseDialog component renders correctly; SEA 1`] = `
+<Dialog
+  className="default"
+  onClose={[Function]}
+>
+  <div
+    className="land-factory-purchase-dialog"
+  >
+    <div
+      className="purchase-unit"
+      key="purchase-unit-CARRIER"
+    >
+      <Button
+        disabled={false}
+        onClick={[Function]}
+      >
+        Purchase dialog 
+        CARRIER
+      </Button>
+    </div>
+    <div
+      className="purchase-unit"
+      key="purchase-unit-DESTROYER"
+    >
+      <Button
+        disabled={false}
+        onClick={[Function]}
+      >
+        Purchase dialog 
+        DESTROYER
+      </Button>
+    </div>
+    <div
+      className="purchase-unit"
+      key="purchase-unit-SUBMARINE"
+    >
+      <Button
+        disabled={false}
+        onClick={[Function]}
+      >
+        Purchase dialog 
+        SUBMARINE
+      </Button>
+    </div>
+  </div>
+</Dialog>
+`;
