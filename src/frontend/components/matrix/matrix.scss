@@ -29,10 +29,9 @@
         @include matrix-container($matrix-actionable-color);
       }
 
-      & > div {
+      .cell-button {
         height: $matrixCellHeight;
         width: $matrixCellWidth;
-        z-index: -1;
       }
     }
   }
