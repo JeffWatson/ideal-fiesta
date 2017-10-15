@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`frontend/components/terrain/mountain component renders correctly 1`] = `
+<div
+  className="mountain-container"
+>
+  <div>
+    Children
+  </div>
+</div>
+`;

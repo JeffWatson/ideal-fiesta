@@ -11,7 +11,7 @@ const FactoryPurchaseDialog = ({ type, onUnitClick, onDialogClose }) => (<Dialog
       const unitProps = UNITS[unit.name];
       return (<div className="purchase-unit" key={`purchase-unit-${unit.name}`}>
         <Button onClick={() => onUnitClick(unit)}>
-        Purchase dialog {unitProps.name}
+          {unitProps.name}
         </Button>
       </div>);
     })}
