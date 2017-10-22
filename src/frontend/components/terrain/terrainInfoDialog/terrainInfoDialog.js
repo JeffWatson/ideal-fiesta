@@ -1,17 +1,21 @@
 import React from 'react';
-import { func, string } from 'prop-types';
+import { bool, func, number, shape } from 'prop-types';
 import Dialog from 'components/controls/dialog';
 
 // TODO implement when adding terrain modifiers...
-const TerrainInfoDialog = ({ type, onDialogClose }) => (<Dialog onClose={() => onDialogClose()}>
+const TerrainInfoDialog = ({ terrain, onDialogClose }) => (<Dialog onClose={() => onDialogClose()}>
   <div className="terrain-info-dialog">
-  Info Dialog for {type}
+    {JSON.stringify(terrain)}
   </div>
 </Dialog>);
 
 TerrainInfoDialog.propTypes = {
   onDialogClose: func.isRequired,
-  type: string.isRequired,
+  terrain: shape({
+    defenseBonus: number.isRequired,
+    actionable: bool.isRequired,
+    selectable: bool.isRequired,
+  }).isRequired,
 };
 
 export default TerrainInfoDialog;

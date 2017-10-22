@@ -160,3 +160,5 @@ export const MOVE_PATH_TYPES = [
 ];
 
 export const MAX_HEALTH = 20;
+
+// TODO, I totally forgot about the HQ concept. Capture HQ to win immediately. Something to think about for game loop task...
