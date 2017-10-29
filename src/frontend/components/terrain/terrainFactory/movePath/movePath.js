@@ -5,8 +5,7 @@ import { MOVE_PATH_TYPES } from 'shared/sharedConstants';
 
 import './movePath.scss';
 
-const MovePath = (props) => {
-  const { direction } = props;
+const MovePath = ({ direction }) => {
   const className = classnames('movePath', direction);
 
   return (<div className={className} />);
