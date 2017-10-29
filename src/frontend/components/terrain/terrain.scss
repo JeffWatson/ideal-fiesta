@@ -1,0 +1,5 @@
+@import "./../../app/style/variables";
+
+.terrain-container {
+  @include health-container();
+}

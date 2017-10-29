@@ -1,14 +1,14 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Grass from './../grass';
+import Sand from './../sand';
 
 const props = {
   children: (<div>Children</div>),
 };
 
-describe('frontend/components/terrain/grass component', () => {
+describe('frontend/components/terrain/sand component', () => {
   it('renders correctly', () => {
-    const component = shallow(<Grass {...props} />);
+    const component = shallow(<Sand {...props} />);
 
     expect(component).toMatchSnapshot();
   });

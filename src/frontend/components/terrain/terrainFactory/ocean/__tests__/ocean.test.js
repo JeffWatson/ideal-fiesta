@@ -1,14 +1,14 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Mountain from './../mountain';
+import Ocean from './../ocean';
 
 const props = {
   children: (<div>Children</div>),
 };
 
-describe('frontend/components/terrain/mountain component', () => {
+describe('frontend/components/terrain/ocean component', () => {
   it('renders correctly', () => {
-    const component = shallow(<Mountain {...props} />);
+    const component = shallow(<Ocean {...props} />);
 
     expect(component).toMatchSnapshot();
   });
