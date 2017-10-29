@@ -6,6 +6,7 @@ import FactoryPurchaseDialog from './../factoryPurchaseDialog';
 const props = {
   onUnitClick: () => {},
   onDialogClose: () => {},
+  onUnitPurchase: () => {},
 };
 
 describe('frontend/components/terrain/buildings/FactoryPurchaseDialog component', () => {
