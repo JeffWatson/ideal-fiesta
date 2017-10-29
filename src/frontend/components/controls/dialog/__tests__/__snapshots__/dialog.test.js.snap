@@ -2,16 +2,20 @@
 
 exports[`frontend/components/dialog component renders correctly 1`] = `
 <div
-  className="dialog class"
+  className="dialog-outside"
 >
-  <Button
-    className="close"
-    disabled={false}
-    onClick={[Function]}
-    text="close"
-  />
-  <div>
-    Children
+  <div
+    className="dialog class"
+  >
+    <Button
+      className="close"
+      disabled={false}
+      onClick={[Function]}
+      text="close"
+    />
+    <div>
+      Children
+    </div>
   </div>
 </div>
 `;
