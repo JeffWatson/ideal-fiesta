@@ -13,8 +13,6 @@ class Terrain extends Component {
   constructor() {
     super();
     this.onClick = this.onClick.bind(this);
-    // this.onHoverIn = this.onHoverIn.bind(this);
-    // this.onHoverOut = this.onHoverOut.bind(this);
     this.onUnitPurchase = this.onUnitPurchase.bind(this);
     this.closeDialog = this.closeDialog.bind(this);
     this.state = {
@@ -28,7 +26,7 @@ class Terrain extends Component {
 
     onCellSelected(this.props);
     const state = isCurrentPlayer && !isOccupied ? { showPurchaseDialog: true } : { showTerrainInfoDialog: true };
-    return this.setState(state);
+    return !isOccupiedByPlayer && this.setState(state);
   }
 
   onUnitPurchase(unit) {

@@ -1,3 +1,3 @@
-import MatrixView from './matrix';
+import ConnectedMatrixView from './matrix';
 
-export { MatrixView as default };
+export { ConnectedMatrixView as default };

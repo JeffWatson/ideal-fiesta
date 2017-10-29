@@ -1,3 +1,3 @@
-import CurrentPlayerHeader from './currentPlayerHeader';
+import ConnectedCurrentPlayerHeader from './currentPlayerHeader';
 
-export { CurrentPlayerHeader as default };
+export { ConnectedCurrentPlayerHeader as default };
