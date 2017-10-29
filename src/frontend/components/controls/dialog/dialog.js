@@ -5,12 +5,15 @@ import Button from 'components/controls/button/button';
 
 import './dialog.scss';
 
+// TODO should only be allowed to have 1 dialog...
 const Dialog = ({ children, onClose, className }) => {
   const dialogClassName = classnames('dialog', className);
 
-  return (<div className={dialogClassName}>
-    <Button className="close" onClick={() => onClose()} text="close" />
-    { children }
+  return (<div className="dialog-outside">
+    <div className={dialogClassName}>
+      <Button className="close" onClick={() => onClose()} text="close" />
+      { children }
+    </div>
   </div>);
 };
 

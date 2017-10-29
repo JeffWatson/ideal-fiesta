@@ -13,28 +13,21 @@ class Terrain extends Component {
   constructor() {
     super();
     this.onClick = this.onClick.bind(this);
+    // this.onHoverIn = this.onHoverIn.bind(this);
+    // this.onHoverOut = this.onHoverOut.bind(this);
     this.onUnitPurchase = this.onUnitPurchase.bind(this);
-    this.onDialogCloseClick = this.onDialogCloseClick.bind(this);
+    this.closeDialog = this.closeDialog.bind(this);
     this.state = {
       showBuildingInfoDialog: false,
       showPurchaseDialog: false,
     };
   }
 
-  onDialogCloseClick() {
-    this.setState({
-      showPurchaseDialog: false,
-      showBuildingInfoDialog: false,
-    });
-  }
-
   onClick() {
-    const { onLandFactoryClick, isCurrentPlayer, isOccupied, isOccupiedByPlayer } = this.props;
-    if (isOccupiedByPlayer) {
-      return null;
-    }
-    onLandFactoryClick(this.props);
-    const state = isCurrentPlayer && !isOccupied ? { showPurchaseDialog: true } : { showBuildingInfoDialog: true };
+    const { onCellSelected, isCurrentPlayer, isOccupied, isOccupiedByPlayer } = this.props;
+
+    onCellSelected(this.props);
+    const state = isCurrentPlayer && !isOccupied ? { showPurchaseDialog: true } : { showTerrainInfoDialog: true };
     return this.setState(state);
   }
 
@@ -42,19 +35,29 @@ class Terrain extends Component {
     const { onUnitPurchase, row, column, currentPlayer } = this.props;
 
     onUnitPurchase({ unit, row, column, currentPlayer });
-    this.onDialogCloseClick();
+    this.closeDialog();
+  }
+
+  closeDialog() {
+    const { onCellUnselected } = this.props;
+    onCellUnselected(this.props);
+
+    this.setState({
+      showPurchaseDialog: false,
+      showTerrainInfoDialog: false,
+    });
   }
 
   render() {
-    const { children, terrain } = this.props;
-    const { showPurchaseDialog, showBuildingInfoDialog } = this.state;
-    return (<div className="terrain-container" >
-      {showPurchaseDialog && (<FactoryPurchaseDialog
+    const { children, terrain, showDialog } = this.props;
+    const { showPurchaseDialog, showTerrainInfoDialog } = this.state;
+    return (<div className="terrain-container" onMouseEnter={this.onHoverIn} onMouseOut={this.onHoverOut}>
+      {showDialog && showPurchaseDialog && (<FactoryPurchaseDialog
         type="LAND"
-        onDialogClose={this.onDialogCloseClick}
+        onDialogClose={this.closeDialog}
         onUnitPurchase={this.onUnitPurchase}
       />)}
-      {showBuildingInfoDialog && (<TerrainInfoDialog terrain={terrain} onDialogClose={this.onDialogCloseClick} />)}
+      {showDialog && showTerrainInfoDialog && (<TerrainInfoDialog terrain={terrain} onDialogClose={this.closeDialog} />)}
       <Button className="cell-button transparent" onClick={this.onClick}>
         { children }
       </Button>
@@ -65,18 +68,20 @@ class Terrain extends Component {
 Terrain.propTypes = {
   terrain: shape({
     defenseBonus: number.isRequired,
-    actionable: bool.isRequired,
-    selectable: bool.isRequired,
+    actionable: bool,
+    selectable: bool,
   }).isRequired,
   isCurrentPlayer: bool.isRequired,
   isOccupied: bool.isRequired,
   isOccupiedByPlayer: bool.isRequired,
-  onLandFactoryClick: func.isRequired,
+  onCellSelected: func.isRequired,
+  onCellUnselected: func.isRequired,
   onUnitPurchase: func.isRequired,
   children: node,
   row: number.isRequired,
   column: number.isRequired,
   currentPlayer: string.isRequired,
+  showDialog: bool.isRequired,
 };
 
 Terrain.defaultProps = {

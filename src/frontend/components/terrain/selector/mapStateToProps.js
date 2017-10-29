@@ -1,3 +1,5 @@
-export default function mapStateToProps(/* state */) {
-  return {};
+export default function mapStateToProps(state) {
+  return {
+    showDialog: state.terrain.get('showDialog'),
+  };
 }
