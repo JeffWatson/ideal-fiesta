@@ -1,5 +1,179 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`frontend/components/matrix component CONNECTED selects initial state properly 1`] = `
+<MatrixView
+  matrix={
+    Immutable.Map {
+      currentPlayer: "BLUE",
+      columns: 5,
+      rows: 5,
+      players: Immutable.List [
+        "BLUE",
+        "GREEN",
+        "RED",
+        "YELLOW",
+      ],
+      grid: Immutable.List [
+        Immutable.List [
+          Immutable.Map {
+            terrain: "SAND",
+            unit: Immutable.Map {
+              actor: "SOLDIER",
+              health: 20,
+              player: "GREEN",
+            },
+          },
+          Immutable.Map {
+            terrain: "SAND",
+          },
+          Immutable.Map {
+            terrain: "SAND",
+          },
+          Immutable.Map {
+            terrain: "SAND",
+            unit: Immutable.Map {
+              actor: "SMALL_TANK",
+              health: 20,
+              player: "RED",
+            },
+          },
+          Immutable.Map {
+            terrain: "SAND",
+          },
+        ],
+        Immutable.List [
+          Immutable.Map {
+            terrain: "OCEAN",
+          },
+          Immutable.Map {
+            terrain: "OCEAN",
+          },
+          Immutable.Map {
+            terrain: "OCEAN",
+          },
+          Immutable.Map {
+            terrain: "OCEAN",
+          },
+          Immutable.Map {
+            terrain: "LAND_FACTORY",
+            building: Immutable.Map {
+              health: 20,
+              player: "RED",
+            },
+          },
+        ],
+        Immutable.List [
+          Immutable.Map {
+            terrain: "GRASS",
+          },
+          Immutable.Map {
+            terrain: "SAND",
+          },
+          Immutable.Map {
+            terrain: "MOUNTAIN",
+          },
+          Immutable.Map {
+            terrain: "GRASS",
+            unit: Immutable.Map {
+              actor: "SOLDIER",
+              health: 20,
+              player: "BLUE",
+            },
+          },
+          Immutable.Map {
+            terrain: "SAND",
+          },
+        ],
+        Immutable.List [
+          Immutable.Map {
+            terrain: "LAND_FACTORY",
+            building: Immutable.Map {
+              health: 20,
+              player: "BLUE",
+            },
+          },
+          Immutable.Map {
+            terrain: "SAND",
+          },
+          Immutable.Map {
+            terrain: "SAND",
+          },
+          Immutable.Map {
+            terrain: "GRASS",
+            unit: Immutable.Map {
+              actor: "SOLDIER",
+              health: 20,
+              player: "BLUE",
+            },
+          },
+          Immutable.Map {
+            terrain: "SAND",
+          },
+        ],
+        Immutable.List [
+          Immutable.Map {
+            terrain: "SAND",
+          },
+          Immutable.Map {
+            terrain: "GRASS",
+          },
+          Immutable.Map {
+            terrain: "SAND",
+            unit: Immutable.Map {
+              actor: "SMALL_TANK",
+              health: 20,
+              player: "BLUE",
+            },
+          },
+          Immutable.Map {
+            terrain: "SAND",
+          },
+          Immutable.Map {
+            terrain: "SAND",
+            unit: Immutable.Map {
+              actor: "SOLDIER",
+              health: 20,
+              player: "YELLOW",
+            },
+          },
+        ],
+      ],
+    }
+  }
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+  storeSubscription={
+    Subscription {
+      "listeners": Object {
+        "clear": [Function],
+        "get": [Function],
+        "notify": [Function],
+        "subscribe": [Function],
+      },
+      "onStateChange": [Function],
+      "parentSub": undefined,
+      "store": Object {
+        "clearActions": [Function],
+        "dispatch": [Function],
+        "getActions": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+      },
+      "unsubscribe": [Function],
+    }
+  }
+/>
+`;
+
 exports[`frontend/components/matrix component renders correctly 1`] = `
 <div
   className="matrix"
