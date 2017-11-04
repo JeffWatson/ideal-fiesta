@@ -13,10 +13,12 @@ export default class UnitFactory {
   static createUnit({ unit, disabled }) {
     const unitProps = extend(UNITS[unit.get('actor')], { player: toLower(unit.get('player')), disabled });
 
-    return (<div>
-      {UnitFactory.renderUnit(unitProps)}
-      <Health health={unit.get('health')} className={'unit'} />
-    </div>);
+    return (
+      <div>
+        {UnitFactory.renderUnit(unitProps)}
+        <Health health={unit.get('health')} className="unit" />
+      </div>
+    );
   }
 
   static renderUnit(unitProps) {

@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`frontend/components/units ALL UNIT tests should render Artillery correctly 1`] = `
+<div
+  className="unit artillery BLUE"
+>
+  Artillery!
+</div>
+`;
+
+exports[`frontend/components/units ALL UNIT tests should render SmallTank correctly 1`] = `
+<div
+  className="unit smallTank BLUE"
+>
+  SmallTank!
+</div>
+`;
+
+exports[`frontend/components/units ALL UNIT tests should render Soldier correctly 1`] = `
+<div
+  className="unit soldier BLUE"
+>
+  Soldier!
+</div>
+`;
