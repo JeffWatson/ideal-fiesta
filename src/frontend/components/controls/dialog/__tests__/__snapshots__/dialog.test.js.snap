@@ -13,8 +13,12 @@ exports[`frontend/components/dialog component renders correctly 1`] = `
       onClick={[Function]}
       text="close"
     />
-    <div>
-      Children
+    <div
+      className="children"
+    >
+      <div>
+        Children
+      </div>
     </div>
   </div>
 </div>

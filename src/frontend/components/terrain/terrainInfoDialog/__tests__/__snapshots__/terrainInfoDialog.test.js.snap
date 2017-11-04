@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`frontend/components/terrain/terrainInfoDialog component renders correctly 1`] = `
+<Dialog
+  className="default"
+  onClose={[Function]}
+>
+  <div
+    className="terrain-info-dialog"
+  >
+    <div
+      className="defense"
+    >
+      DEF: 
+      10
+    </div>
+  </div>
+</Dialog>
+`;

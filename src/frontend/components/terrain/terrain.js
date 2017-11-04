@@ -10,11 +10,21 @@ import mapDispatchToProps from './actions/mapDispatchToProps';
 import './terrain.scss';
 
 class Terrain extends Component {
+  // TODO use for movement?
+  static onMouseEnter() {
+    // console.log('mouseEntered');
+  }
+
+  static onMouseLeave() {
+    // console.log('mouseLeft');
+  }
+
   constructor() {
     super();
     this.onClick = this.onClick.bind(this);
     this.onUnitPurchase = this.onUnitPurchase.bind(this);
     this.closeDialog = this.closeDialog.bind(this);
+
     this.state = {
       showBuildingInfoDialog: false,
       showPurchaseDialog: false,
@@ -49,7 +59,7 @@ class Terrain extends Component {
   render() {
     const { children, terrain, showDialog } = this.props;
     const { showPurchaseDialog, showTerrainInfoDialog } = this.state;
-    return (<div className="terrain-container" onMouseEnter={this.onHoverIn} onMouseOut={this.onHoverOut}>
+    return (<div className="terrain-container" onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave}>
       {showDialog && showPurchaseDialog && (<FactoryPurchaseDialog
         type="LAND"
         onDialogClose={this.closeDialog}

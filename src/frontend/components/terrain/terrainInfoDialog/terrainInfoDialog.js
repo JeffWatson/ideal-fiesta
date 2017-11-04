@@ -2,10 +2,14 @@ import React from 'react';
 import { bool, func, number, shape } from 'prop-types';
 import Dialog from 'components/controls/dialog';
 
-// TODO implement when adding terrain modifiers...
+import './terrainInfoDialog.scss';
+
+// TODO add terrain modifiers...
 const TerrainInfoDialog = ({ terrain, onDialogClose }) => (<Dialog onClose={() => onDialogClose()}>
   <div className="terrain-info-dialog">
-    {JSON.stringify(terrain)}
+    <div className="defense">
+      DEF: { terrain.defenseBonus }
+    </div>
   </div>
 </Dialog>);
 

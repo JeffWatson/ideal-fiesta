@@ -12,7 +12,7 @@ const Dialog = ({ children, onClose, className }) => {
   return (<div className="dialog-outside">
     <div className={dialogClassName}>
       <Button className="close" onClick={() => onClose()} text="close" />
-      { children }
+      <div className="children">{ children }</div>
     </div>
   </div>);
 };
