@@ -10,20 +10,13 @@ import mapDispatchToProps from './actions/mapDispatchToProps';
 import './terrain.scss';
 
 class Terrain extends Component {
-  // TODO use for movement?
-  static onMouseEnter() {
-    // console.log('mouseEntered');
-  }
-
-  static onMouseLeave() {
-    // console.log('mouseLeft');
-  }
-
   constructor() {
     super();
     this.onClick = this.onClick.bind(this);
     this.onUnitPurchase = this.onUnitPurchase.bind(this);
     this.closeDialog = this.closeDialog.bind(this);
+    this.onMouseEnter = this.onMouseEnter.bind(this);
+    this.onMouseLeave = this.onMouseLeave.bind(this);
 
     this.state = {
       showTerrainInfoDialog: false,
@@ -31,18 +24,28 @@ class Terrain extends Component {
     };
   }
 
+  onMouseEnter() {
+    if (this.props.isMovementMode) {
+      console.log('mouseEntered');
+    }
+  }
+
+  onMouseLeave() {
+    if (this.props.isMovementMode) {
+      console.log('mouseLeft');
+    }
+  }
+
   onClick() {
-    const { onCellSelected, onCellUnselected, isCurrentPlayer, isOccupied, isOccupiedByPlayer, selected } = this.props;
+    const { onCellSelected, onCellUnselected, onMovementInitiated, isCurrentPlayer, isOccupied, isOccupiedByPlayer, selected, disabled } = this.props;
 
     if (selected) {
       return onCellUnselected(this.props);
-    } else {
-      onCellSelected(this.props);
     }
+    onCellSelected(this.props);
 
-    if (isOccupiedByPlayer) {
-      console.log('occupied by player, initiate movement, if not already moved.');
-      return false;
+    if (isOccupiedByPlayer && !disabled) {
+      return onMovementInitiated(this.props);
     } else if (isOccupied) {
       console.log('is occupied, but not by player, show ranges.');
       return false;
@@ -53,10 +56,11 @@ class Terrain extends Component {
   }
 
   onUnitPurchase(unit) {
-    const { onUnitPurchase, row, column, currentPlayer } = this.props;
+    const { onUnitPurchase, row, column, currentPlayer, onCellUnselected } = this.props;
 
     onUnitPurchase({ unit, row, column, currentPlayer });
     this.closeDialog();
+    onCellUnselected(this.props);
   }
 
   closeDialog() {
@@ -95,16 +99,20 @@ Terrain.propTypes = {
   onCellSelected: func.isRequired,
   onCellUnselected: func.isRequired,
   onUnitPurchase: func.isRequired,
+  onMovementInitiated: func.isRequired,
   children: node,
   row: number.isRequired,
   column: number.isRequired,
   currentPlayer: string.isRequired,
+  isMovementMode: bool.isRequired,
+  disabled: bool,
   selected: bool,
 };
 
 Terrain.defaultProps = {
   children: undefined,
   selected: false,
+  disabled: false,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Terrain);

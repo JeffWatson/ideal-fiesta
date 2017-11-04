@@ -35,12 +35,11 @@ export class MatrixView extends Component {
     const className = classNames('matrix-cell', { attackable, movable, actionable, selected, combinable });
 
     const key = `matrix-cell-${column}-${row}-${terrain}`;
-    const children = unit && UnitFactory.createUnit({ factoryType: 'LAND', unit, disabled });
     return (<td
       className={className}
       key={key}
     >
-      {TerrainFactory.createTerrain({ terrain, children, unit, row, column, moveDirection, currentPlayer, building, selected })}
+      {TerrainFactory.createTerrain({ terrain, unit, row, column, moveDirection, currentPlayer, building, selected, disabled })}
     </td>);
   }
 
