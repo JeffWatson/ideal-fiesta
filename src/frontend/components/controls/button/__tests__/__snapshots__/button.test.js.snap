@@ -5,6 +5,7 @@ exports[`frontend/components/button component renders correctly 1`] = `
   className="button class"
   disabled={false}
   onClick={[Function]}
+  tabIndex={0}
 >
   text
   <div>

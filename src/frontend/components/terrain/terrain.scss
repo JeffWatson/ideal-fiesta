@@ -2,4 +2,5 @@
 
 .terrain-container {
   @include health-container();
+  z-index: auto;
 }

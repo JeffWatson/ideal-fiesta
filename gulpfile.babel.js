@@ -1,7 +1,7 @@
 import eslint from 'gulp-eslint';
 import gulp from 'gulp';
 
-const allSource = 'src/**/*.js'
+const allSource = 'src/**/*.js';
 
 gulp.task('eslint', () => gulp.src([allSource])
   .pipe(eslint({

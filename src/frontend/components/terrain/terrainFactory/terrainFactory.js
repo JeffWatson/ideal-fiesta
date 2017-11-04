@@ -1,5 +1,6 @@
 import React from 'react';
 import { TERRAIN, TERRAIN_TYPES as TYPES } from 'shared/sharedConstants';
+import UnitFactory from 'components/units/unitFactory';
 
 import Terrain from './../terrain';
 import Grass from './grass';
@@ -12,7 +13,7 @@ import Health from './../../health';
 import MovePath from './movePath';
 
 export default class TerrainFactory {
-  static createTerrain({ terrain, unit, children, moveDirection, building, currentPlayer, row, column }) {
+  static createTerrain({ terrain, unit, moveDirection, building, currentPlayer, row, column, selected, disabled }) {
     const player = building && building.get('player');
     const unitPlayer = unit && unit.get('player');
     const terrainProps = {
@@ -24,10 +25,12 @@ export default class TerrainFactory {
       currentPlayer,
       isOccupied: !!unit,
       isOccupiedByPlayer: unitPlayer === currentPlayer,
+      selected,
+      disabled,
     };
 
     const contents = (<div>
-      { children }
+      { unit && UnitFactory.createUnit({ factoryType: 'LAND', unit, disabled }) }
       { moveDirection && (<MovePath direction={moveDirection} />) }
       { building && (<Health health={building.get('health')} className={'building'} />) }
     </div>);

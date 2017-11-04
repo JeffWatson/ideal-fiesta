@@ -10,46 +10,59 @@ import mapDispatchToProps from './actions/mapDispatchToProps';
 import './terrain.scss';
 
 class Terrain extends Component {
-  // TODO use for movement?
-  static onMouseEnter() {
-    // console.log('mouseEntered');
-  }
-
-  static onMouseLeave() {
-    // console.log('mouseLeft');
-  }
-
   constructor() {
     super();
     this.onClick = this.onClick.bind(this);
     this.onUnitPurchase = this.onUnitPurchase.bind(this);
     this.closeDialog = this.closeDialog.bind(this);
+    this.onMouseEnter = this.onMouseEnter.bind(this);
+    this.onMouseLeave = this.onMouseLeave.bind(this);
 
     this.state = {
-      showBuildingInfoDialog: false,
+      showTerrainInfoDialog: false,
       showPurchaseDialog: false,
     };
   }
 
-  onClick() {
-    const { onCellSelected, isCurrentPlayer, isOccupied, isOccupiedByPlayer } = this.props;
+  onMouseEnter() {
+    if (this.props.isMovementMode) {
+      console.log('mouseEntered');
+    }
+  }
 
+  onMouseLeave() {
+    if (this.props.isMovementMode) {
+      console.log('mouseLeft');
+    }
+  }
+
+  onClick() {
+    const { onCellSelected, onCellUnselected, onMovementInitiated, onRangeCheck, isCurrentPlayer, isOccupied, isOccupiedByPlayer, selected, disabled } = this.props;
+
+    if (selected) {
+      return onCellUnselected(this.props);
+    }
     onCellSelected(this.props);
+
+    if (isOccupiedByPlayer && !disabled) {
+      return onMovementInitiated(this.props);
+    } else if (isOccupied) {
+      return onRangeCheck(this.props);
+    }
+
     const state = isCurrentPlayer && !isOccupied ? { showPurchaseDialog: true } : { showTerrainInfoDialog: true };
-    return !isOccupiedByPlayer && this.setState(state);
+    return this.setState(state);
   }
 
   onUnitPurchase(unit) {
-    const { onUnitPurchase, row, column, currentPlayer } = this.props;
+    const { onUnitPurchase, row, column, currentPlayer, onCellUnselected } = this.props;
 
     onUnitPurchase({ unit, row, column, currentPlayer });
     this.closeDialog();
+    onCellUnselected(this.props);
   }
 
   closeDialog() {
-    const { onCellUnselected } = this.props;
-    onCellUnselected(this.props);
-
     this.setState({
       showPurchaseDialog: false,
       showTerrainInfoDialog: false,
@@ -57,15 +70,15 @@ class Terrain extends Component {
   }
 
   render() {
-    const { children, terrain, showDialog } = this.props;
+    const { children, terrain, selected } = this.props;
     const { showPurchaseDialog, showTerrainInfoDialog } = this.state;
     return (<div className="terrain-container" onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave}>
-      {showDialog && showPurchaseDialog && (<FactoryPurchaseDialog
+      {selected && showPurchaseDialog && (<FactoryPurchaseDialog
         type="LAND"
         onDialogClose={this.closeDialog}
         onUnitPurchase={this.onUnitPurchase}
       />)}
-      {showDialog && showTerrainInfoDialog && (<TerrainInfoDialog terrain={terrain} onDialogClose={this.closeDialog} />)}
+      {selected && showTerrainInfoDialog && (<TerrainInfoDialog terrain={terrain} onDialogClose={this.closeDialog} />)}
       <Button className="cell-button transparent" onClick={this.onClick}>
         { children }
       </Button>
@@ -85,15 +98,21 @@ Terrain.propTypes = {
   onCellSelected: func.isRequired,
   onCellUnselected: func.isRequired,
   onUnitPurchase: func.isRequired,
+  onMovementInitiated: func.isRequired,
+  onRangeCheck: func.isRequired,
   children: node,
   row: number.isRequired,
   column: number.isRequired,
   currentPlayer: string.isRequired,
-  showDialog: bool.isRequired,
+  isMovementMode: bool.isRequired,
+  disabled: bool,
+  selected: bool,
 };
 
 Terrain.defaultProps = {
   children: undefined,
+  selected: false,
+  disabled: false,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Terrain);
