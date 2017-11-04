@@ -5,6 +5,7 @@
     clear: both;
 
     .matrix-cell {
+      padding: 0;
       height: $matrixCellHeight;
       width: $matrixCellWidth;
       border: 3px solid $matrix-unselected-color;

@@ -17,8 +17,8 @@ TerrainInfoDialog.propTypes = {
   onDialogClose: func.isRequired,
   terrain: shape({
     defenseBonus: number.isRequired,
-    actionable: bool.isRequired,
-    selectable: bool.isRequired,
+    actionable: bool,
+    selectable: bool,
   }).isRequired,
 };
 

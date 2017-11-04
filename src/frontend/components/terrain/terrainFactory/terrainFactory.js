@@ -12,7 +12,7 @@ import Health from './../../health';
 import MovePath from './movePath';
 
 export default class TerrainFactory {
-  static createTerrain({ terrain, unit, children, moveDirection, building, currentPlayer, row, column }) {
+  static createTerrain({ terrain, unit, children, moveDirection, building, currentPlayer, row, column, selected }) {
     const player = building && building.get('player');
     const unitPlayer = unit && unit.get('player');
     const terrainProps = {
@@ -24,6 +24,7 @@ export default class TerrainFactory {
       currentPlayer,
       isOccupied: !!unit,
       isOccupiedByPlayer: unitPlayer === currentPlayer,
+      selected,
     };
 
     const contents = (<div>

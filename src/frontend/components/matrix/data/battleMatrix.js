@@ -108,8 +108,17 @@ class BattleMatrix {
     return this.matrix.getIn(['grid', row, column, 'terrain']);
   }
 
-  deselectAllCells() {
-    this.matrix = this.matrix.set('grid', this.matrix.get('grid').map(matrixRow => matrixRow.map(matrixColumn =>
+  static onCellSelected({ matrix, row, column }) {
+    const updated = BattleMatrix.deselectAllCells({ matrix });
+    return BattleMatrix.selectCell({ matrix: updated, row, column });
+  }
+
+  static selectCell({ matrix, row, column }) {
+    return matrix.set('grid', matrix.get('grid').setIn([row, column, 'selected'], true));
+  }
+
+  static deselectAllCells({ matrix }) {
+    return matrix.set('grid', matrix.get('grid').map(matrixRow => matrixRow.map(matrixColumn =>
       matrixColumn.merge({
         selected: false,
         attackable: false,
@@ -130,10 +139,6 @@ class BattleMatrix {
       }))));
   }
 
-  selectCell({ row, column }) {
-    this.matrix = this.matrix.set('grid', this.matrix.get('grid').setIn([row, column, 'selected'], true));
-    this.markMovementTail({ row, column });
-  }
 
   markMovementTail({ row, column }) {
     this.resetMovementTail({ row, column });

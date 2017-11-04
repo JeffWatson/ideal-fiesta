@@ -26,17 +26,30 @@ class Terrain extends Component {
     this.closeDialog = this.closeDialog.bind(this);
 
     this.state = {
-      showBuildingInfoDialog: false,
+      showTerrainInfoDialog: false,
       showPurchaseDialog: false,
     };
   }
 
   onClick() {
-    const { onCellSelected, isCurrentPlayer, isOccupied, isOccupiedByPlayer } = this.props;
+    const { onCellSelected, onCellUnselected, isCurrentPlayer, isOccupied, isOccupiedByPlayer, selected } = this.props;
 
-    onCellSelected(this.props);
+    if (selected) {
+      return onCellUnselected(this.props);
+    } else {
+      onCellSelected(this.props);
+    }
+
+    if (isOccupiedByPlayer) {
+      console.log('occupied by player, initiate movement, if not already moved.');
+      return false;
+    } else if (isOccupied) {
+      console.log('is occupied, but not by player, show ranges.');
+      return false;
+    }
+
     const state = isCurrentPlayer && !isOccupied ? { showPurchaseDialog: true } : { showTerrainInfoDialog: true };
-    return !isOccupiedByPlayer && this.setState(state);
+    return this.setState(state);
   }
 
   onUnitPurchase(unit) {
@@ -47,9 +60,6 @@ class Terrain extends Component {
   }
 
   closeDialog() {
-    const { onCellUnselected } = this.props;
-    onCellUnselected(this.props);
-
     this.setState({
       showPurchaseDialog: false,
       showTerrainInfoDialog: false,
@@ -57,15 +67,15 @@ class Terrain extends Component {
   }
 
   render() {
-    const { children, terrain, showDialog } = this.props;
+    const { children, terrain, selected } = this.props;
     const { showPurchaseDialog, showTerrainInfoDialog } = this.state;
     return (<div className="terrain-container" onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave}>
-      {showDialog && showPurchaseDialog && (<FactoryPurchaseDialog
+      {selected && showPurchaseDialog && (<FactoryPurchaseDialog
         type="LAND"
         onDialogClose={this.closeDialog}
         onUnitPurchase={this.onUnitPurchase}
       />)}
-      {showDialog && showTerrainInfoDialog && (<TerrainInfoDialog terrain={terrain} onDialogClose={this.closeDialog} />)}
+      {selected && showTerrainInfoDialog && (<TerrainInfoDialog terrain={terrain} onDialogClose={this.closeDialog} />)}
       <Button className="cell-button transparent" onClick={this.onClick}>
         { children }
       </Button>
@@ -89,11 +99,12 @@ Terrain.propTypes = {
   row: number.isRequired,
   column: number.isRequired,
   currentPlayer: string.isRequired,
-  showDialog: bool.isRequired,
+  selected: bool,
 };
 
 Terrain.defaultProps = {
   children: undefined,
+  selected: false,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Terrain);

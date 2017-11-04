@@ -5,6 +5,7 @@ $matrixCellWidth: 100px;
   position: relative;
   height: $matrixCellHeight;
   width: $matrixCellWidth;
+  z-index: -1;
 }
 
 @mixin matrix-container($color) {

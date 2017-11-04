@@ -40,7 +40,7 @@ export class MatrixView extends Component {
       className={className}
       key={key}
     >
-      {TerrainFactory.createTerrain({ terrain, children, unit, row, column, moveDirection, currentPlayer, building })}
+      {TerrainFactory.createTerrain({ terrain, children, unit, row, column, moveDirection, currentPlayer, building, selected })}
     </td>);
   }
 
