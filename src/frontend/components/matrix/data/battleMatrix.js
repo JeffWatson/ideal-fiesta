@@ -2,7 +2,6 @@ import { isEqual, some } from 'lodash';
 import {
   UNITS,
   TERRAIN,
-  MOVE_PATH_VALUES,
 } from 'shared/sharedConstants';
 
 class BattleMatrix {

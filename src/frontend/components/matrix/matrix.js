@@ -3,7 +3,6 @@ import { shape } from 'prop-types';
 import { connect } from 'react-redux';
 import { times } from 'lodash';
 import classNames from 'classnames';
-import UnitFactory from 'components/units/unitFactory';
 import TerrainFactory from 'components/terrain/terrainFactory';
 import CurrentPlayerHeader from 'components/currentPlayerHeader';
 import mapStateToProps from './selector/mapStateToProps';
@@ -12,16 +11,7 @@ import mapDispatchToProps from './actions/mapDispatchToProps';
 import './matrix.scss';
 
 export class MatrixView extends Component {
-  generateMatrix({ matrix, currentPlayer }) {
-    return (times(matrix.get('rows'), row => (<tr className="matrix-row" key={`matrix-row-${row}`}>
-      {times(matrix.get('columns'), (column) => {
-        const cell = matrix.getIn(['grid', row, column]);
-        return this.renderCell({ column, row, cell, currentPlayer });
-      })}
-    </tr>)));
-  }
-
-  renderCell({ column, row, cell, currentPlayer }) {
+  static renderCell({ column, row, cell, currentPlayer }) {
     const unit = cell.get('unit');
     const terrain = cell.get('terrain');
     const selected = cell.get('selected');
@@ -41,6 +31,16 @@ export class MatrixView extends Component {
     >
       {TerrainFactory.createTerrain({ terrain, unit, row, column, moveDirection, currentPlayer, building, selected, disabled })}
     </td>);
+  }
+
+  generateMatrix({ currentPlayer }) {
+    const { matrix } = this.props;
+    return (times(matrix.get('rows'), row => (<tr className="matrix-row" key={`matrix-row-${row}`}>
+      {times(matrix.get('columns'), (column) => {
+        const cell = matrix.getIn(['grid', row, column]);
+        return MatrixView.renderCell({ column, row, cell, currentPlayer });
+      })}
+    </tr>)));
   }
 
   render() {
