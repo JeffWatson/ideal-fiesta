@@ -1,4 +1,4 @@
-import onLandFactoryClick from './onLandFactoryClick';
+import onLandFactoryClick from './onLandFactoryClick'; // TODO is this used anymore?
 import onUnitPurchase from './onUnitPurchase';
 import onCellSelected from './onCellSelected';
 import onCellUnselected from './onCellUnselected';

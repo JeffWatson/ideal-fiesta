@@ -14,6 +14,7 @@ module.exports = {
     'describe': true,
     'expect': true,
     'jest': true,
+    'beforeEach': true,
   },
   'extends': 'airbnb',
   'plugins': ['import'],
