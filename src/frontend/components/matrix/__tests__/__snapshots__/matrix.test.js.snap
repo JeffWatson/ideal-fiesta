@@ -4,136 +4,136 @@ exports[`frontend/components/matrix component CONNECTED selects initial state pr
 <MatrixView
   matrix={
     Immutable.Map {
-      currentPlayer: "BLUE",
-      columns: 5,
-      rows: 5,
-      players: Immutable.List [
+      "currentPlayer": "BLUE",
+      "columns": 5,
+      "rows": 5,
+      "players": Immutable.List [
         "BLUE",
         "GREEN",
         "RED",
         "YELLOW",
       ],
-      grid: Immutable.List [
+      "grid": Immutable.List [
         Immutable.List [
           Immutable.Map {
-            terrain: "SAND",
-            unit: Immutable.Map {
-              actor: "SOLDIER",
-              health: 20,
-              player: "GREEN",
+            "terrain": "SAND",
+            "unit": Immutable.Map {
+              "actor": "SOLDIER",
+              "health": 20,
+              "player": "GREEN",
             },
           },
           Immutable.Map {
-            terrain: "SAND",
+            "terrain": "SAND",
           },
           Immutable.Map {
-            terrain: "SAND",
+            "terrain": "SAND",
           },
           Immutable.Map {
-            terrain: "SAND",
-            unit: Immutable.Map {
-              actor: "SMALL_TANK",
-              health: 20,
-              player: "RED",
+            "terrain": "SAND",
+            "unit": Immutable.Map {
+              "actor": "SMALL_TANK",
+              "health": 20,
+              "player": "RED",
             },
           },
           Immutable.Map {
-            terrain: "SAND",
+            "terrain": "SAND",
           },
         ],
         Immutable.List [
           Immutable.Map {
-            terrain: "OCEAN",
+            "terrain": "OCEAN",
           },
           Immutable.Map {
-            terrain: "OCEAN",
+            "terrain": "OCEAN",
           },
           Immutable.Map {
-            terrain: "OCEAN",
+            "terrain": "OCEAN",
           },
           Immutable.Map {
-            terrain: "OCEAN",
+            "terrain": "OCEAN",
           },
           Immutable.Map {
-            terrain: "LAND_FACTORY",
-            building: Immutable.Map {
-              health: 20,
-              player: "RED",
+            "terrain": "LAND_FACTORY",
+            "building": Immutable.Map {
+              "health": 20,
+              "player": "RED",
             },
           },
         ],
         Immutable.List [
           Immutable.Map {
-            terrain: "GRASS",
+            "terrain": "GRASS",
           },
           Immutable.Map {
-            terrain: "SAND",
+            "terrain": "SAND",
           },
           Immutable.Map {
-            terrain: "MOUNTAIN",
+            "terrain": "MOUNTAIN",
           },
           Immutable.Map {
-            terrain: "GRASS",
-            unit: Immutable.Map {
-              actor: "SOLDIER",
-              health: 20,
-              player: "BLUE",
+            "terrain": "GRASS",
+            "unit": Immutable.Map {
+              "actor": "SOLDIER",
+              "health": 20,
+              "player": "BLUE",
             },
           },
           Immutable.Map {
-            terrain: "SAND",
+            "terrain": "SAND",
           },
         ],
         Immutable.List [
           Immutable.Map {
-            terrain: "LAND_FACTORY",
-            building: Immutable.Map {
-              health: 20,
-              player: "BLUE",
+            "terrain": "LAND_FACTORY",
+            "building": Immutable.Map {
+              "health": 20,
+              "player": "BLUE",
             },
           },
           Immutable.Map {
-            terrain: "SAND",
+            "terrain": "SAND",
           },
           Immutable.Map {
-            terrain: "SAND",
+            "terrain": "SAND",
           },
           Immutable.Map {
-            terrain: "GRASS",
-            unit: Immutable.Map {
-              actor: "SOLDIER",
-              health: 20,
-              player: "BLUE",
+            "terrain": "GRASS",
+            "unit": Immutable.Map {
+              "actor": "SOLDIER",
+              "health": 20,
+              "player": "BLUE",
             },
           },
           Immutable.Map {
-            terrain: "SAND",
+            "terrain": "SAND",
           },
         ],
         Immutable.List [
           Immutable.Map {
-            terrain: "SAND",
+            "terrain": "SAND",
           },
           Immutable.Map {
-            terrain: "GRASS",
+            "terrain": "GRASS",
           },
           Immutable.Map {
-            terrain: "SAND",
-            unit: Immutable.Map {
-              actor: "SMALL_TANK",
-              health: 20,
-              player: "BLUE",
+            "terrain": "SAND",
+            "unit": Immutable.Map {
+              "actor": "SMALL_TANK",
+              "health": 20,
+              "player": "BLUE",
             },
           },
           Immutable.Map {
-            terrain: "SAND",
+            "terrain": "SAND",
           },
           Immutable.Map {
-            terrain: "SAND",
-            unit: Immutable.Map {
-              actor: "SOLDIER",
-              health: 20,
-              player: "YELLOW",
+            "terrain": "SAND",
+            "unit": Immutable.Map {
+              "actor": "SOLDIER",
+              "health": 20,
+              "player": "YELLOW",
             },
           },
         ],
