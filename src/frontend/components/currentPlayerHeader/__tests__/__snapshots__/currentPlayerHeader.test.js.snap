@@ -41,6 +41,7 @@ exports[`frontend/components/CurrentPlayerHeader component renders correctly 1`]
         className="end-turn-button"
         disabled={false}
         onClick={[Function]}
+        tabIndex={0}
         text="End Turn"
       />
     </div>

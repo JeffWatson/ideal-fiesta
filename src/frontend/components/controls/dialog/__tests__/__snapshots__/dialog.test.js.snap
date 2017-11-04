@@ -11,6 +11,7 @@ exports[`frontend/components/dialog component renders correctly 1`] = `
       className="close"
       disabled={false}
       onClick={[Function]}
+      tabIndex={0}
       text="close"
     />
     <div
