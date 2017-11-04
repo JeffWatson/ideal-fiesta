@@ -3,6 +3,7 @@ import onUnitPurchase from './onUnitPurchase';
 import onCellSelected from './onCellSelected';
 import onCellUnselected from './onCellUnselected';
 import onMovementInitiated from './onMovementInitiated';
+import onRangeCheck from './onRangeCheck';
 
 export default function mapDispatchToProps(dispatch) {
   return {
@@ -11,5 +12,6 @@ export default function mapDispatchToProps(dispatch) {
     onCellSelected: args => dispatch(onCellSelected(args)),
     onCellUnselected: args => dispatch(onCellUnselected(args)),
     onMovementInitiated: args => dispatch(onMovementInitiated(args)),
+    onRangeCheck: args => dispatch(onRangeCheck(args)),
   };
 }

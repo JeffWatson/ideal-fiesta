@@ -37,7 +37,7 @@ class Terrain extends Component {
   }
 
   onClick() {
-    const { onCellSelected, onCellUnselected, onMovementInitiated, isCurrentPlayer, isOccupied, isOccupiedByPlayer, selected, disabled } = this.props;
+    const { onCellSelected, onCellUnselected, onMovementInitiated, onRangeCheck, isCurrentPlayer, isOccupied, isOccupiedByPlayer, selected, disabled } = this.props;
 
     if (selected) {
       return onCellUnselected(this.props);
@@ -47,8 +47,7 @@ class Terrain extends Component {
     if (isOccupiedByPlayer && !disabled) {
       return onMovementInitiated(this.props);
     } else if (isOccupied) {
-      console.log('is occupied, but not by player, show ranges.');
-      return false;
+      return onRangeCheck(this.props);
     }
 
     const state = isCurrentPlayer && !isOccupied ? { showPurchaseDialog: true } : { showTerrainInfoDialog: true };
@@ -100,6 +99,7 @@ Terrain.propTypes = {
   onCellUnselected: func.isRequired,
   onUnitPurchase: func.isRequired,
   onMovementInitiated: func.isRequired,
+  onRangeCheck: func.isRequired,
   children: node,
   row: number.isRequired,
   column: number.isRequired,
